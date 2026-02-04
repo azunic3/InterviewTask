@@ -25,7 +25,6 @@ public class DrugsController : ControllerBase
 
         var preview = BuildPreview(doc.RootElement);
 
-        // doc se može dispose-ati odmah jer ništa iz njega više ne vraćaš
         doc.Dispose();
 
         return Ok(new
@@ -38,7 +37,6 @@ public class DrugsController : ControllerBase
 
     private static object BuildPreview(JsonElement root)
     {
-        // openFDA obično vraća: { meta: {...}, results: [ {...}, ... ] }
         if (!root.TryGetProperty("results", out var results) || results.ValueKind != JsonValueKind.Array)
             return new { found = 0, items = Array.Empty<object>() };
 
@@ -46,7 +44,7 @@ public class DrugsController : ControllerBase
             .Take(3)
             .Select(r => new
             {
-                // Ova polja često postoje, ali ne uvijek - zato TryGet
+                // ne postoje uvijek ova polja zato try to get 
                 brand_name = GetFirstString(r, "openfda", "brand_name"),
                 generic_name = GetFirstString(r, "openfda", "generic_name"),
                 manufacturer_name = GetFirstString(r, "openfda", "manufacturer_name"),
@@ -69,7 +67,7 @@ public class DrugsController : ControllerBase
                 return null;
         }
 
-        // Polje može biti string ili array stringova
+        // može biti string ili array stringova
         return cur.ValueKind switch
         {
             JsonValueKind.String => cur.GetString(),

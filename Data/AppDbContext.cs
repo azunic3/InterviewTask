@@ -1,11 +1,14 @@
 ﻿using InterviewTask.Model;
+using InterviewTask.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace InterviewTask.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options) { }
+
         public DbSet<DrugLabelCache> DrugLabelCaches => Set<DrugLabelCache>();
         public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
         public DbSet<AvailabilityRequest> AvailabilityRequests => Set<AvailabilityRequest>();
@@ -21,8 +24,13 @@ namespace InterviewTask.Data
 
                 e.HasKey(x => x.Id);
 
-                e.Property(x => x.SetId).IsRequired().HasMaxLength(80);
-                e.Property(x => x.QueryKey).IsRequired().HasMaxLength(200);
+                e.Property(x => x.SetId)
+                    .IsRequired()
+                    .HasMaxLength(80);
+
+                e.Property(x => x.QueryKey)
+                    .IsRequired()
+                    .HasMaxLength(200);
 
                 e.Property(x => x.BrandName).HasMaxLength(200);
                 e.Property(x => x.GenericName).HasMaxLength(200);
@@ -41,11 +49,18 @@ namespace InterviewTask.Data
 
                 e.HasKey(x => x.Id);
 
-                e.Property(x => x.DrugKey).IsRequired().HasMaxLength(120);
-                e.Property(x => x.DisplayName).HasMaxLength(250);
+                e.Property(x => x.DrugKey)
+                    .IsRequired()
+                    .HasMaxLength(120);
 
-                e.Property(x => x.Quantity).IsRequired();
-                e.Property(x => x.UpdatedAtUtc).IsRequired();
+                e.Property(x => x.Status)
+                    .IsRequired()
+                    .HasConversion<int>(); 
+
+                e.Property(x => x.Quantity);
+
+                e.Property(x => x.LastUpdated)
+                    .IsRequired();
 
                 e.HasIndex(x => x.DrugKey).IsUnique();
             });
@@ -56,14 +71,24 @@ namespace InterviewTask.Data
 
                 e.HasKey(x => x.Id);
 
-                e.Property(x => x.DrugKey).IsRequired().HasMaxLength(120);
-                e.Property(x => x.Email).IsRequired().HasMaxLength(320);
+                e.Property(x => x.DrugKey)
+                    .IsRequired()
+                    .HasMaxLength(120);
 
-                e.Property(x => x.Status).IsRequired(); 
-                e.Property(x => x.CreatedAtUtc).IsRequired();
+                e.Property(x => x.Email)
+                    .IsRequired()
+                    .HasMaxLength(320);
 
-                e.HasIndex(x => new { x.DrugKey, x.Status });
-                e.HasIndex(x => x.Email);
+                e.Property(x => x.Status)
+                    .IsRequired()
+                    .HasConversion<int>(); 
+
+                e.Property(x => x.CreatedAtUtc)
+                    .IsRequired();
+
+                e.HasIndex(x => new { x.Email, x.DrugKey }).IsUnique();
+
+                e.HasIndex(x => x.Status);
             });
 
             modelBuilder.Entity<AllergyCheckLog>(e =>
@@ -72,16 +97,27 @@ namespace InterviewTask.Data
 
                 e.HasKey(x => x.Id);
 
-                e.Property(x => x.DrugKey).IsRequired().HasMaxLength(120);
-                e.Property(x => x.AllergensRaw).IsRequired().HasMaxLength(1000);
+                e.Property(x => x.Query)
+                    .IsRequired()
+                    .HasMaxLength(200);
 
-                e.Property(x => x.ResultJson).IsRequired();
-                e.Property(x => x.CheckedAtUtc).IsRequired();
+                e.Property(x => x.DrugKey)
+                    .IsRequired()
+                    .HasMaxLength(120);
+
+                e.Property(x => x.AllergensRaw)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                e.Property(x => x.ResultJson)
+                    .IsRequired();
+
+                e.Property(x => x.CheckedAtUtc)
+                    .IsRequired();
 
                 e.HasIndex(x => x.DrugKey);
                 e.HasIndex(x => x.CheckedAtUtc);
             });
-
         }
-        }
+    }
 }

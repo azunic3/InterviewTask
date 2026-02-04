@@ -19,7 +19,7 @@ namespace InterviewTask.Services
         {
             var q = query.Trim().ToLowerInvariant();
 
-            // Preciznije: traži po brand/generic/active_ingredient
+            // search ide po brandu i generic name da bude preciznije i manje rezultata
             var search =
                 $"openfda.brand_name:\"{q}\" OR " +
                 $"openfda.generic_name:\"{q}\" OR " +
