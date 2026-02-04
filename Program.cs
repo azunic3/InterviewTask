@@ -1,4 +1,5 @@
 using InterviewTask.Data;
+using InterviewTask.Options;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,15 @@ builder.Services.AddCors(options =>
         p => p.WithOrigins("http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod());
+});
+
+builder.Services.Configure<OpenFDAOptions>(builder.Configuration.GetSection("OpenFda"));
+builder.Services.AddScoped<InterviewTask.Services.OpenFDAService>();
+
+builder.Services.AddHttpClient("OpenFda", (sp, client) =>
+{
+    var opt = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<OpenFDAOptions>>().Value;
+    client.BaseAddress = new Uri(opt.BaseUrl.TrimEnd('/'));
 });
 
 var app = builder.Build();
