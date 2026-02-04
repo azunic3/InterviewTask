@@ -1,6 +1,10 @@
-﻿using System.Text.Json;
+﻿using InterviewTask.Data;
+using InterviewTask.Dtos;
+using InterviewTask.Model;
 using InterviewTask.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace InterviewTask.Controllers;
 
@@ -9,52 +13,109 @@ namespace InterviewTask.Controllers;
 public class DrugsController : ControllerBase
 {
     private readonly OpenFDAService _openFda;
+    private readonly InventoryService _inventory;
+    private readonly AppDbContext _db;
 
-    public DrugsController(OpenFDAService openFda)
+    public DrugsController(OpenFDAService openFda, InventoryService inventory, AppDbContext db)
     {
         _openFda = openFda;
+        _inventory = inventory;
+        _db = db;
     }
 
     [HttpGet("search")]
-    public async Task<IActionResult> Search([FromQuery] string query, CancellationToken ct)
+    public async Task<ActionResult<DrugSearchResponseDto>> Search(
+        [FromQuery] string query,
+        [FromQuery] string? allergens,
+        CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(query))
             return BadRequest("Query is required.");
 
-        var doc = await _openFda.SearchDrugLabelRawAsync(query, limit: 3, ct);
+        using var doc = await _openFda.SearchDrugLabelRawAsync(query, limit: 3, ct);
 
-        var preview = BuildPreview(doc.RootElement);
+        if (!doc.RootElement.TryGetProperty("results", out var results) || results.ValueKind != JsonValueKind.Array)
+            return NotFound("No results from openFDA.");
 
-        doc.Dispose();
+        var first = results.EnumerateArray().FirstOrDefault();
+        if (first.ValueKind == JsonValueKind.Undefined)
+            return NotFound("No results from openFDA.");
 
-        return Ok(new
+        var brand = GetFirstString(first, "openfda", "brand_name");
+        var generic = GetFirstString(first, "openfda", "generic_name");
+        var manufacturer = GetFirstString(first, "openfda", "manufacturer_name");
+
+        var activeIngredient = GetFirstString(first, "active_ingredient");
+        var warnings = GetFirstString(first, "warnings");
+        var contraindications = GetFirstString(first, "contraindications");
+
+        var safetyText = string.Join("\n\n",
+            new[] { activeIngredient, warnings, contraindications }
+                .Where(x => !string.IsNullOrWhiteSpace(x)));
+
+        var drugKey = DrugKeyBuilder.Build(generic, brand, query);
+
+        var inventoryItem = await _inventory.GetOrCreateAsync(drugKey, ct);
+
+        var matched = AllergyMatcher.GetMatchedTerms(safetyText, allergens);
+
+        var dto = new DrugSearchResponseDto
         {
-            query,
-            preview
-        });
+            Query = query.Trim(),
+            DrugKey = drugKey,
+            Drug = new DrugInfoDto
+            {
+                BrandName = brand,
+                GenericName = generic,
+                ManufacturerName = manufacturer,
+                ActiveIngredient = activeIngredient
+            },
+            SafetyText = safetyText,
+            MatchedTerms = matched,
+            HasPossibleAllergyMatch = matched.Count > 0,
+            AvailabilityStatus = inventoryItem.Status.ToString()
+        };
+
+        var log = new AllergyCheckLog
+        {
+            Query = query.Trim(),
+            DrugKey = drugKey,
+            AllergensRaw = allergens ?? "",
+            ResultJson = JsonSerializer.Serialize(new
+            {
+                matchedTerms = matched,
+                hasMatch = matched.Count > 0
+            }),
+            CheckedAtUtc = DateTime.UtcNow
+        };
+
+        _db.AllergyCheckLogs.Add(log);
+        await _db.SaveChangesAsync(ct);
+
+        return Ok(dto);
     }
 
-
-    private static object BuildPreview(JsonElement root)
+    [HttpGet("popular")]
+    public async Task<ActionResult<List<PopularSearchesDto>>> GetPopularSearches(
+    [FromQuery] int limit = 5,
+    CancellationToken ct = default)
     {
-        if (!root.TryGetProperty("results", out var results) || results.ValueKind != JsonValueKind.Array)
-            return new { found = 0, items = Array.Empty<object>() };
+        if (limit <= 0 || limit > 20)
+            limit = 5;
 
-        var items = results.EnumerateArray()
-            .Take(3)
-            .Select(r => new
+        var data = await _db.AllergyCheckLogs
+            .AsNoTracking()
+            .GroupBy(x => x.Query)
+            .Select(g => new PopularSearchesDto
             {
-                // ne postoje uvijek ova polja zato try to get 
-                brand_name = GetFirstString(r, "openfda", "brand_name"),
-                generic_name = GetFirstString(r, "openfda", "generic_name"),
-                manufacturer_name = GetFirstString(r, "openfda", "manufacturer_name"),
-                active_ingredient = GetFirstString(r, "active_ingredient"),
-                warnings = GetFirstString(r, "warnings"),
-                contraindications = GetFirstString(r, "contraindications")
+                Query = g.Key,
+                Count = g.Count()
             })
-            .ToList();
+            .OrderByDescending(x => x.Count)
+            .Take(limit)
+            .ToListAsync(ct);
 
-        return new { found = items.Count, items };
+        return Ok(data);
     }
 
     private static string? GetFirstString(JsonElement obj, params string[] path)
@@ -67,7 +128,6 @@ public class DrugsController : ControllerBase
                 return null;
         }
 
-        // može biti string ili array stringova
         return cur.ValueKind switch
         {
             JsonValueKind.String => cur.GetString(),
