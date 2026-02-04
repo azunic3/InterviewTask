@@ -1,0 +1,8 @@
+# Development config (API keys)
+appsettings.Development.json
+
+# Build output
+bin/
+obj/
+
+./vs
