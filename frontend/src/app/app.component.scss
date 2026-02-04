@@ -3,3 +3,52 @@
   background-color: #f7f9fc;
   min-height: calc(100vh - 64px);
 }
+
+
+.app-shell {
+  min-height: calc(100vh - 64px); // 64px navbar
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: 36px 18px;
+}
+
+.content > * {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+
+
+
+.footer {
+  padding: 16px 32px;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .footer-left, .footer-right {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #475569;
+    font-size: 13px;
+
+    strong {
+      color: #0f172a;
+      font-size: 14px;
+    }
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+}

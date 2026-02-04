@@ -1,16 +1,47 @@
-<h2>Popular Searches</h2>
+<section class="hero">
+  <h1>Welcome to Pharmacy</h1>
+  <p class="subtitle">
+    Search for a medicine, check potential allergy risks, and see whether it’s currently in stock in our pharmacy.
+  </p>
 
-<div class="cards">
-  <div
-    class="card"
-    *ngFor="let item of popularSearches"
-    (click)="goToSearch(item.query)"
-  >
-    <h3>{{ item.query }}</h3>
-    <p>{{ item.count }} searches</p>
+  <a class="primary-btn" routerLink="/search">Start a Drug Search</a>
+</section>
+
+<section class="popular">
+  <div class="section-title">
+    <h2>Popular Searches</h2>
+    <p>Quick shortcuts to commonly searched medicines.</p>
   </div>
-</div>
 
-<div *ngIf="popularSearches.length === 0">
-  No searches yet.
+  <div *ngIf="loading" class="muted">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && popularSearches.length > 0" class="cards">
+    <div
+  class="card"
+  *ngFor="let item of popularSearches"
+  (click)="goToSearch(item.query)"
+  role="button"
+  tabindex="0"
+>
+  <div class="card-text">
+    <h3>{{ item.query }}</h3>
+    <span class="card-hint">Tap to search</span>
+  </div>
+
+  <div class="card-arrow">→</div>
 </div>
+  </div>
+
+  <div *ngIf="!loading && popularSearches.length === 0" class="muted">
+    No popular searches yet. Try searching for a medicine first.
+  </div>
+</section>
+
+<p class="disclaimer">
+  * This app uses publicly available drug label data and provides informational previews only.
+  It does not guarantee 100% accuracy and is not a substitute for professional medical advice.
+  Always consult a pharmacist or doctor.
+</p>
+
+
