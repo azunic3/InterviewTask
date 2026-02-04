@@ -1,4 +1,39 @@
-<div class="container">
-  <h1>Drug search</h1>
+<h2>Drug Search</h2>
+
+<div class="search-box">
+  <input
+    type="text"
+    [(ngModel)]="query"
+    placeholder="Enter drug name (e.g. aspirin)"
+  />
+  <button (click)="search()">Search</button>
+</div>
+
+<div *ngIf="loading">Searching...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="result" class="result-card">
+
+  <h3>{{ result.drug?.brandName || result.drug?.genericName || query }}</h3>
+
+  <p><strong>Active ingredient:</strong> {{ result.drug?.activeIngredient }}</p>
+
+  <p
+    [class.warn]="result.hasPossibleAllergyMatch"
+    [class.ok]="!result.hasPossibleAllergyMatch"
+  >
+    <strong>Allergy check:</strong>
+    {{ result.hasPossibleAllergyMatch ? 'Possible allergy detected' : 'No known allergy detected' }}
+  </p>
+
+  <p>
+    <strong>Availability:</strong>
+    {{ result.availabilityStatus }}
+  </p>
+
+  <details>
+    <summary>Safety information</summary>
+    <pre>{{ result.safetyText }}</pre>
+  </details>
 
 </div>

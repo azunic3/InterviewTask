@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { HomeComponent } from './features/home/home.component';
+import { DrugSearchComponent } from './features/drug-search/drug-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    DrugSearchComponent
   ],
   imports: [
     BrowserModule,

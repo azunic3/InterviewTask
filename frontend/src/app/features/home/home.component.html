@@ -1,17 +1,16 @@
 <h2>Popular Searches</h2>
 
-<div *ngIf="loading">Loading...</div>
-<div *ngIf="error" class="error">{{ error }}</div>
+<div class="cards">
+  <div
+    class="card"
+    *ngFor="let item of popularSearches"
+    (click)="goToSearch(item.query)"
+  >
+    <h3>{{ item.query }}</h3>
+    <p>{{ item.count }} searches</p>
+  </div>
+</div>
 
-<ul *ngIf="!loading && popularSearches.length > 0" class="popular-list">
-  <li *ngFor="let item of popularSearches">
-    <button (click)="goToSearch(item.query)">
-      {{ item.query }}
-      <span class="count">({{ item.count }})</span>
-    </button>
-  </li>
-</ul>
-
-<div *ngIf="!loading && popularSearches.length === 0">
+<div *ngIf="popularSearches.length === 0">
   No searches yet.
 </div>

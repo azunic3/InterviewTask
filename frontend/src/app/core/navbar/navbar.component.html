@@ -1,1 +1,14 @@
-<p>navbar works!</p>
+<nav class="navbar">
+  <div class="brand" routerLink="/">
+    Health<span>DrugCheck</span>
+  </div>
+
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Home
+    </a>
+    <a routerLink="/search" routerLinkActive="active">
+      Drug Search
+    </a>
+  </div>
+</nav>
