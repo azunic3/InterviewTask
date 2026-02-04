@@ -1,12 +1,4 @@
 <div class="container">
   <h1>Drug search</h1>
 
-  <div class="row">
-    <input [(ngModel)]="query" placeholder="npr. aspirin" />
-    <button (click)="onSearch()">Search</button>
-  </div>
-
-  <p *ngIf="error" class="error">{{ error }}</p>
-
-  <pre *ngIf="result">{{ result | json }}</pre>
 </div>

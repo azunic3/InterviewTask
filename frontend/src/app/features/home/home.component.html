@@ -1,0 +1,17 @@
+<h2>Popular Searches</h2>
+
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<ul *ngIf="!loading && popularSearches.length > 0" class="popular-list">
+  <li *ngFor="let item of popularSearches">
+    <button (click)="goToSearch(item.query)">
+      {{ item.query }}
+      <span class="count">({{ item.count }})</span>
+    </button>
+  </li>
+</ul>
+
+<div *ngIf="!loading && popularSearches.length === 0">
+  No searches yet.
+</div>

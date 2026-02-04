@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DrugSearchComponent } from './features/drug-search/drug-search.component';
+import { HomeComponent } from './features/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: DrugSearchComponent }
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({
