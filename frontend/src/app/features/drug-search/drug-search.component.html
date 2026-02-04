@@ -1,39 +1,109 @@
-<h2>Drug Search</h2>
+<section class="ds">
+  <header class="ds__header">
+    <h1>Drug Search</h1>
+    <p class="ds__subtitle">
+      Search a medicine label, screen for potential allergen term matches, and check local availability.
+    </p>
+  </header>
 
-<div class="search-box">
-  <input
-    type="text"
-    [(ngModel)]="query"
-    placeholder="Enter drug name (e.g. aspirin)"
-  />
-  <button (click)="search()">Search</button>
-</div>
+  <div class="ds__panel">
+    <div class="ds__row">
+      <label class="ds__label">Medicine name</label>
+      <div class="ds__controls">
+        <input class="ds__input" [(ngModel)]="query" placeholder="e.g. paracetamol" />
+        <button class="ds__btn" (click)="search()" [disabled]="loading || !query">
+          {{ loading ? 'Searching…' : 'Search' }}
+        </button>
+      </div>
+    </div>
 
-<div *ngIf="loading">Searching...</div>
-<div *ngIf="error" class="error">{{ error }}</div>
+    <div class="ds__row ds__row--tight">
+      <label class="ds__label">Known allergens (comma-separated)</label>
+      <input class="ds__input" [(ngModel)]="allergensInput" placeholder="e.g. penicillin, sulfa" />
+      <div class="ds__hint">
+        We match terms against warnings/contraindications and active ingredient text. This is informational only.
+      </div>
+    </div>
 
-<div *ngIf="result" class="result-card">
+    <p class="ds__error" *ngIf="error">{{ error }}</p>
+  </div>
 
-  <h3>{{ result.drug?.brandName || result.drug?.genericName || query }}</h3>
+  <section *ngIf="result" class="ds__result">
+    <div class="ds__title">
+      <h2>{{ result.query | titlecase }}</h2>
+    </div>
 
-  <p><strong>Active ingredient:</strong> {{ result.drug?.activeIngredient }}</p>
+    <div class="ds__grid">
+      <div class="ds__box">
+        <h3>Summary</h3>
 
-  <p
-    [class.warn]="result.hasPossibleAllergyMatch"
-    [class.ok]="!result.hasPossibleAllergyMatch"
-  >
-    <strong>Allergy check:</strong>
-    {{ result.hasPossibleAllergyMatch ? 'Possible allergy detected' : 'No known allergy detected' }}
-  </p>
+        <dl class="ds__dl">
+          <dt>Availability</dt>
+          <dd>
+            <span
+              [class.ds__status-ok]="result.availabilityStatus === 'Available'"
+              [class.ds__status-warn]="result.availabilityStatus !== 'Available'">
+              {{ result.availabilityStatus === 'Available' ? 'In stock' : 'Not available' }}
+            </span>
+          </dd>
 
-  <p>
-    <strong>Availability:</strong>
-    {{ result.availabilityStatus }}
-  </p>
+          <dt>Allergen screening</dt>
+          <dd>
+            <ng-container [ngSwitch]="allergyStatus.type">
+              <span *ngSwitchCase="'none'">No allergens provided (add allergens to screen).</span>
+              <span *ngSwitchCase="'safe'">No matches found for provided allergens.</span>
+              <span *ngSwitchCase="'match'">Possible match found for one or more allergens.</span>
+            </ng-container>
+          </dd>
 
-  <details>
-    <summary>Safety information</summary>
-    <pre>{{ result.safetyText }}</pre>
-  </details>
+          <dt *ngIf="allergyStatus.type === 'match'">Matched terms</dt>
+          <dd *ngIf="allergyStatus.type === 'match'">
+            <ul class="ds__list-inline">
+              <li *ngFor="let m of allergyStatus.matched">{{ m }}</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
 
-</div>
+      <div class="ds__box">
+        <h3>Label details</h3>
+
+        <ul class="ds__bullets">
+          <li *ngIf="result.drug?.brandName"><strong>Brand:</strong> {{ result.drug.brandName }}</li>
+          <li *ngIf="result.drug?.genericName"><strong>Generic:</strong> {{ result.drug.genericName }}</li>
+          <li *ngIf="result.drug?.manufacturerName"><strong>Manufacturer:</strong> {{ result.drug.manufacturerName }}</li>
+          <li *ngIf="result.drug?.activeIngredient"><strong>Active ingredient:</strong> {{ result.drug.activeIngredient }}</li>
+          <li *ngIf="!result.drug?.brandName && !result.drug?.genericName && !result.drug?.manufacturerName && !result.drug?.activeIngredient">
+            No structured label fields were returned for this query.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <details class="ds__details">
+      <summary>Safety information</summary>
+      <pre class="ds__safety">{{ result.safetyText }}</pre>
+    </details>
+
+    <section *ngIf="result.availabilityStatus !== 'Available'" class="ds__notify">
+      <h3>Notify me when available</h3>
+      <p>
+        Enter your email to save a notification request. (Email sending is not implemented in this demo.)
+      </p>
+
+      <div class="ds__notify-controls">
+        <input class="ds__input" [(ngModel)]="notifyEmail" type="email" placeholder="you@example.com" />
+        <button class="ds__btn" (click)="notifyMe()" [disabled]="notifyState==='loading' || !notifyEmail">
+          {{ notifyState === 'loading' ? 'Saving…' : 'Save request' }}
+        </button>
+      </div>
+
+      <p class="ds__notify-msg" *ngIf="notifyMessage">{{ notifyMessage }}</p>
+    </section>
+
+    <p class="ds__disclaimer">
+      * This application provides an informational preview of publicly available drug label text. It does not diagnose allergies
+      and should not replace professional medical advice.
+    </p>
+  </section>
+</section>

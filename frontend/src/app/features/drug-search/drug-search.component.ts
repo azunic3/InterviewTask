@@ -6,22 +6,25 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-drug-search',
   templateUrl: './drug-search.component.html',
-  styleUrls: ['./drug-search.component.scss']
+  styleUrls: ['./drug-search.component.scss'],
 })
 export class DrugSearchComponent implements OnInit {
-
   query = '';
   loading = false;
   error: string | null = null;
   result: any = null;
+  allergensInput = ''; // npr "penicillin, sulfa"
+  notifyEmail = '';
+  notifyState: 'idle' | 'loading' | 'success' | 'exists' | 'error' = 'idle';
+  notifyMessage = '';
 
   constructor(
     private route: ActivatedRoute,
-    private drugApi: DrugApiService
+    private drugApi: DrugApiService,
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       if (params['q']) {
         this.query = params['q'];
         this.search();
@@ -44,7 +47,48 @@ export class DrugSearchComponent implements OnInit {
       error: () => {
         this.error = 'Failed to search drug.';
         this.loading = false;
-      }
+      },
     });
   }
+
+get allergensList(): string[] {
+  return this.allergensInput
+    .split(',')
+    .map(x => x.trim())
+    .filter(Boolean);
+}
+
+notifyMe(): void {
+  if (!this.result?.drugKey) return;
+  if (!this.notifyEmail) return;
+
+  this.notifyState = 'loading';
+  this.notifyMessage = '';
+
+  this.drugApi.notifyAvailability(this.result.drugKey, this.notifyEmail).subscribe({
+    next: (res) => {
+      this.notifyState = res?.created ? 'success' : 'exists';
+      this.notifyMessage = res?.created
+        ? 'Thanks! We saved your request and will notify you when it’s available.'
+        : 'You already requested a notification for this medicine.';
+    },
+    error: () => {
+      this.notifyState = 'error';
+      this.notifyMessage = 'Could not save your request. Please try again.';
+    },
+  });
+}
+
+get allergyStatus() {
+  const allergens = this.allergensList;
+  if (!this.result || allergens.length === 0) return { type: 'none', matched: [] as string[] };
+
+  const hay =
+    `${this.result.safetyText ?? ''} ${this.result.drug?.activeIngredient ?? ''}`.toLowerCase();
+
+  const matched = allergens.filter(a => hay.includes(a.toLowerCase()));
+  return { type: matched.length ? 'match' : 'safe', matched };
+}
+
+
 }
