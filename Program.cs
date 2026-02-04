@@ -26,6 +26,7 @@ builder.Services.AddCors(options =>
 builder.Services.Configure<OpenFDAOptions>(builder.Configuration.GetSection("OpenFda"));
 builder.Services.AddScoped<OpenFDAService>();
 builder.Services.AddScoped<InventoryService>();
+builder.Services.AddScoped<AvailabilityRequestService>();
 
 builder.Services.AddHttpClient("OpenFda", (sp, client) =>
 {
