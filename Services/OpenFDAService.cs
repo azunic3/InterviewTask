@@ -59,5 +59,28 @@ namespace InterviewTask.Services
             var stream = await resp.Content.ReadAsStreamAsync(ct);
             return await JsonDocument.ParseAsync(stream, cancellationToken: ct);
         }
+
+        public async Task<JsonDocument> SearchDrugLabelByIngredientRawAsync(string ingredientKey, int limit = 10, CancellationToken ct = default)
+        {
+            var q = ingredientKey.Trim().ToLowerInvariant();
+
+            // prošireno: active_ingredient i generic name (da bude robustnije)
+            var search =
+                $"active_ingredient:\"{q}\" OR " +
+                $"openfda.generic_name:\"{q}\"";
+
+            var url = $"/drug/label.json?search={Uri.EscapeDataString(search)}&limit={limit}";
+
+            if (!string.IsNullOrWhiteSpace(_options.ApiKey))
+                url += $"&api_key={Uri.EscapeDataString(_options.ApiKey!)}";
+
+            var client = _httpClientFactory.CreateClient("OpenFda");
+            using var resp = await client.GetAsync(url, ct);
+            resp.EnsureSuccessStatusCode();
+
+            var stream = await resp.Content.ReadAsStreamAsync(ct);
+            return await JsonDocument.ParseAsync(stream, cancellationToken: ct);
+        }
+
     }
 }

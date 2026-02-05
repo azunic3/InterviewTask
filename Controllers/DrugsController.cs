@@ -157,7 +157,89 @@ public class DrugsController : ControllerBase
         return Ok(dto);
     }
 
-    private static string? GetFirstString(JsonElement obj, params string[] path)
+[HttpGet("similar")]
+public async Task<ActionResult<SimilarDrugsResponseDto>> Similar(
+    [FromQuery] string query,
+    [FromQuery] string? excludeDrugKey,
+    [FromQuery] int limit = 6,
+    CancellationToken ct = default)
+{
+    if (string.IsNullOrWhiteSpace(query))
+        return BadRequest("Query is required.");
+
+    // 1) Uzmi prvi label rezultat za query da izvučemo active ingredient
+    using var firstDoc = await _openFda.SearchDrugLabelRawAsync(query, limit: 1, ct);
+
+    if (!firstDoc.RootElement.TryGetProperty("results", out var firstResults) ||
+        firstResults.ValueKind != JsonValueKind.Array ||
+        !firstResults.EnumerateArray().Any())
+    {
+        return NotFound("No label results for query.");
+    }
+
+    var first = firstResults.EnumerateArray().First();
+
+    var activeRaw = GetFirstString(first, "active_ingredient");
+    var ingredientKey = ActiveIngredientParser.ExtractPrimaryIngredientKey(activeRaw);
+
+    if (string.IsNullOrWhiteSpace(ingredientKey))
+    {
+        return Ok(new SimilarDrugsResponseDto
+        {
+            Query = query.Trim(),
+            IngredientKey = null,
+            Items = new()
+        });
+    }
+
+    // 2) Nađi više label rezultata po ingredientKey
+    using var simDoc = await _openFda.SearchDrugLabelByIngredientRawAsync(ingredientKey, limit: 25, ct);
+
+    if (!simDoc.RootElement.TryGetProperty("results", out var simResults) || simResults.ValueKind != JsonValueKind.Array)
+    {
+        return Ok(new SimilarDrugsResponseDto { Query = query.Trim(), IngredientKey = ingredientKey, Items = new() });
+    }
+
+    var items = new List<SimilarDrugDto>();
+    var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+    foreach (var r in simResults.EnumerateArray())
+    {
+        var brand = GetFirstString(r, "openfda", "brand_name");
+        var generic = GetFirstString(r, "openfda", "generic_name");
+        var manufacturer = GetFirstString(r, "openfda", "manufacturer_name");
+        var ai = GetFirstString(r, "active_ingredient");
+
+        var dk = DrugKeyBuilder.Build(generic, brand, ingredientKey);
+
+        if (!string.IsNullOrWhiteSpace(excludeDrugKey) && dk.Equals(excludeDrugKey, StringComparison.OrdinalIgnoreCase))
+            continue;
+
+        if (!seen.Add(dk))
+            continue;
+
+        items.Add(new SimilarDrugDto
+        {
+            DrugKey = dk,
+            BrandName = brand,
+            GenericName = generic,
+            ManufacturerName = manufacturer,
+            ActiveIngredientRaw = ai
+        });
+
+        if (items.Count >= limit)
+            break;
+    }
+
+    return Ok(new SimilarDrugsResponseDto
+    {
+        Query = query.Trim(),
+        IngredientKey = ingredientKey,
+        Items = items
+    });
+}
+
+private static string? GetFirstString(JsonElement obj, params string[] path)
     {
         JsonElement cur = obj;
 
