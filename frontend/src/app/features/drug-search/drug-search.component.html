@@ -144,6 +144,29 @@
 
             <p class="ds__notify-msg" *ngIf="notifyMessage">{{ notifyMessage }}</p>
           </div>
+
+<div class="ds__box">
+  <h3>Dosage & directions</h3>
+
+  <div *ngIf="usageState === 'loading'">Loading…</div>
+  <div *ngIf="usageState === 'error'">{{ usageMessage }}</div>
+
+  <ng-container *ngIf="usageState === 'success'">
+    <p class="ds__muted" *ngIf="!usageText">{{ usageMessage }}</p>
+
+    <div *ngIf="usageText" class="ds__usage">
+      <p class="ds__usage-text" [class.ds__usage-text--collapsed]="!usageExpanded">
+        {{ usageText }}
+      </p>
+
+      <button type="button" class="ds__link" (click)="usageExpanded = !usageExpanded">
+        {{ usageExpanded ? 'Show less' : 'Show more' }}
+      </button>
+    </div>
+  </ng-container>
+</div>
+
+
         </div>
 
         <p class="ds__disclaimer">

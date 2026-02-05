@@ -284,3 +284,28 @@
   color: #64748b;
 }
 
+.ds__usage-text {
+  margin: 0;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.ds__usage-text--collapsed {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ds__link {
+  margin-top: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #1976d2;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ds__link:hover {
+  text-decoration: underline;
+}

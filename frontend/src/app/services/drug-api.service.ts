@@ -47,9 +47,22 @@ export class DrugApiService {
   }
 
   getSimilarDrugs(query: string, excludeDrugKey?: string, limit = 6) {
-  let url = `${this.baseUrl}/drugs/similar?query=${encodeURIComponent(query)}&limit=${limit}`;
-  if (excludeDrugKey) url += `&excludeDrugKey=${encodeURIComponent(excludeDrugKey)}`;
-  return this.http.get<{ query: string; ingredientKey: string | null; items: any[] }>(url);
-}
+    let url = `${this.baseUrl}/drugs/similar?query=${encodeURIComponent(query)}&limit=${limit}`;
+    if (excludeDrugKey)
+      url += `&excludeDrugKey=${encodeURIComponent(excludeDrugKey)}`;
+    return this.http.get<{
+      query: string;
+      ingredientKey: string | null;
+      items: any[];
+    }>(url);
+  }
 
+  getDrugUsage(query: string) {
+    return this.http.get<{
+      query: string;
+      drugKey: string;
+      usageText: string | null;
+      hasUsageInfo: boolean;
+    }>(`${this.baseUrl}/drugs/usage?query=${encodeURIComponent(query)}`);
+  }
 }

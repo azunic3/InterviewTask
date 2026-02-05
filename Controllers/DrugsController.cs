@@ -239,6 +239,48 @@ public async Task<ActionResult<SimilarDrugsResponseDto>> Similar(
     });
 }
 
+[HttpGet("usage")]
+public async Task<ActionResult<DrugUsageDto>> Usage(
+    [FromQuery] string query,
+    CancellationToken ct)
+{
+    if (string.IsNullOrWhiteSpace(query))
+        return BadRequest("Query is required.");
+
+    using var doc = await _openFda.SearchDrugLabelRawAsync(query, limit: 1, ct);
+
+    if (!doc.RootElement.TryGetProperty("results", out var results) || results.ValueKind != JsonValueKind.Array)
+        return NotFound("No results from openFDA.");
+
+    var first = results.EnumerateArray().FirstOrDefault();
+    if (first.ValueKind == JsonValueKind.Undefined)
+        return NotFound("No results from openFDA.");
+
+    // pokušaj uzeti usage tekst iz najkorisnijih polja
+    var dosage = GetFirstString(first, "dosage_and_administration");
+    var directions = GetFirstString(first, "directions");
+
+    // fallback: nekad bude "information_for_patients" ili slično, ali za sad ostavimo ova 2
+    var usageText = string.Join("\n\n",
+        new[] { dosage, directions }
+            .Where(x => !string.IsNullOrWhiteSpace(x)));
+
+    // drugKey u tvom sistemu
+    var brand = GetFirstString(first, "openfda", "brand_name");
+    var generic = GetFirstString(first, "openfda", "generic_name");
+    var drugKey = DrugKeyBuilder.Build(generic, brand, query);
+
+    var dto = new DrugUsageDto
+    {
+        Query = query.Trim(),
+        DrugKey = drugKey,
+        UsageText = string.IsNullOrWhiteSpace(usageText) ? null : usageText,
+        HasUsageInfo = !string.IsNullOrWhiteSpace(usageText)
+    };
+
+    return Ok(dto);
+}
+
 private static string? GetFirstString(JsonElement obj, params string[] path)
     {
         JsonElement cur = obj;

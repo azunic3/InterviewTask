@@ -26,6 +26,10 @@ export class DrugSearchComponent implements OnInit {
   similarMessage = '';
   similarIngredient: string | null = null;
   similarItems: any[] = [];
+  usageState: 'idle' | 'loading' | 'success' | 'error' = 'idle';
+  usageText: string | null = null;
+  usageMessage = '';
+  usageExpanded = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -112,6 +116,10 @@ export class DrugSearchComponent implements OnInit {
     this.loading = true;
     this.error = null;
     this.result = null;
+    this.usageState = 'idle';
+    this.usageText = null;
+    this.usageMessage = '';
+    this.usageExpanded = false;
 
     this.drugApi.searchDrug(this.query).subscribe({
       next: (res) => {
@@ -119,6 +127,7 @@ export class DrugSearchComponent implements OnInit {
         this.loading = false;
         this.loadTopAdverseEvents();
         this.loadSimilarDrugs();
+        this.loadUsage();
       },
       error: () => {
         this.error = 'Failed to search drug.';
@@ -174,47 +183,69 @@ export class DrugSearchComponent implements OnInit {
   }
 
   loadSimilarDrugs(): void {
-  if (!this.result) return;
-  if (this.result.availabilityStatus === 'Available') return;
+    if (!this.result) return;
+    if (this.result.availabilityStatus === 'Available') return;
 
-  this.similarState = 'loading';
-  this.similarMessage = '';
-  this.similarIngredient = null;
-  this.similarItems = [];
+    this.similarState = 'loading';
+    this.similarMessage = '';
+    this.similarIngredient = null;
+    this.similarItems = [];
 
-  const q = this.result.query; // npr diphenhydramine
-  const exclude = this.result.drugKey;
+    const q = this.result.query; // npr diphenhydramine
+    const exclude = this.result.drugKey;
 
-  this.drugApi.getSimilarDrugs(q, exclude, 6).subscribe({
-    next: (res) => {
-      this.similarIngredient = res?.ingredientKey ?? null;
-      this.similarItems = (res?.items ?? []).slice(0, 6);
-      this.similarState = 'success';
-      if (!this.similarItems.length) {
-        this.similarMessage = 'No similar medicines found.';
-      }
-    },
-    error: () => {
-      this.similarState = 'error';
-      this.similarMessage = 'Could not load similar medicines.';
-    }
-  });
-}
+    this.drugApi.getSimilarDrugs(q, exclude, 6).subscribe({
+      next: (res) => {
+        this.similarIngredient = res?.ingredientKey ?? null;
+        this.similarItems = (res?.items ?? []).slice(0, 6);
+        this.similarState = 'success';
+        if (!this.similarItems.length) {
+          this.similarMessage = 'No similar medicines found.';
+        }
+      },
+      error: () => {
+        this.similarState = 'error';
+        this.similarMessage = 'Could not load similar medicines.';
+      },
+    });
+  }
 
-displayDrugName(item: any): string {
-  return item?.brandName || item?.genericName || item?.drugKey || 'Unknown';
-}
+  displayDrugName(item: any): string {
+    return item?.brandName || item?.genericName || item?.drugKey || 'Unknown';
+  }
 
-pickSimilar(item: any): void {
-  const name = item?.genericName || item?.brandName || item?.drugKey;
-  if (!name) return;
+  pickSimilar(item: any): void {
+    const name = item?.genericName || item?.brandName || item?.drugKey;
+    if (!name) return;
 
-  this.query = name;
-  this.notifyEmail = '';
-  this.notifyMessage = '';
-  this.notifyState = 'idle';
+    this.query = name;
+    this.notifyEmail = '';
+    this.notifyMessage = '';
+    this.notifyState = 'idle';
 
-  this.search();
-}
+    this.search();
+  }
 
+  loadUsage(): void {
+    if (!this.result?.query) return;
+
+    this.usageState = 'loading';
+    this.usageText = null;
+    this.usageMessage = '';
+    this.usageExpanded = false;
+
+    this.drugApi.getDrugUsage(this.result.query).subscribe({
+      next: (res) => {
+        this.usageText = res?.usageText ?? null;
+        this.usageState = 'success';
+        if (!this.usageText)
+          this.usageMessage =
+            'No dosage/directions section was provided for this label.';
+      },
+      error: () => {
+        this.usageState = 'error';
+        this.usageMessage = 'Could not load dosage/directions.';
+      },
+    });
+  }
 }
