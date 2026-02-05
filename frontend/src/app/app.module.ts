@@ -10,6 +10,7 @@ import { NavbarComponent } from './core/navbar/navbar.component';
 import { HomeComponent } from './features/home/home.component';
 import { DrugSearchComponent } from './features/drug-search/drug-search.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,7 @@ import { DrugSearchComponent } from './features/drug-search/drug-search.componen
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

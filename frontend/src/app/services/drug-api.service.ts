@@ -8,10 +8,9 @@ export interface PopularSearch {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DrugApiService {
-
   // backend base URL
   private readonly baseUrl = 'https://localhost:7091/api';
 
@@ -19,7 +18,7 @@ export class DrugApiService {
 
   getPopularSearches(limit: number = 5): Observable<PopularSearch[]> {
     return this.http.get<PopularSearch[]>(
-      `${this.baseUrl}/drugs/popular?limit=${limit}`
+      `${this.baseUrl}/drugs/popular?limit=${limit}`,
     );
   }
 
@@ -32,10 +31,18 @@ export class DrugApiService {
   }
 
   notifyAvailability(drugKey: string, email: string) {
-  return this.http.post<any>(`${this.baseUrl}/availability-requests/notify`, {
-    drugKey,
-    email
-  });
-}
+    return this.http.post<any>(`${this.baseUrl}/availability-requests/notify`, {
+      drugKey,
+      email,
+    });
+  }
 
+  getTopAdverseEvents(query: string, limit = 10) {
+    return this.http.get<{
+      drugKey: string;
+      items: { term: string; count: number }[];
+    }>(
+      `${this.baseUrl}/drugs/top-adverse-events?query=${encodeURIComponent(query)}&limit=${limit}`,
+    );
+  }
 }
