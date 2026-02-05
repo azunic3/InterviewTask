@@ -4,58 +4,114 @@ $text-light: #ffffff;
 $text-muted: rgba(255, 255, 255, 0.85);
 
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
   height: 64px;
   display: flex;
   align-items: center;
 
   padding: 0 32px;
   background: linear-gradient(90deg, $primary, $primary-dark);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  gap: 40px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.16);
+
+  // da brand bude lijevo, linkovi odmah poslije njega (ne skroz desno)
+  gap: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  color: $text-light;
+  user-select: none;
+
+  .brand-icon {
+    font-size: 18px;
+    line-height: 1;
+    transform: translateY(1px);
+    opacity: 0.95;
+  }
+
+  span {
+    font-weight: 400;
+    opacity: 0.9;
+  }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    text-decoration: none;
+    color: $text-muted;
+    font-size: 15px;
+    font-weight: 600;
+
+    position: relative;
+    padding: 8px 10px;
+    border-radius: 12px;
+
+    &:hover {
+      color: $text-light;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-icon {
+      font-size: 16px;
+      line-height: 1;
+      transform: translateY(1px);
+      opacity: 0.95;
+    }
+
+    &.active {
+      color: $text-light;
+      background: rgba(255, 255, 255, 0.16);
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: 4px;
+        height: 2px;
+        background-color: $text-light;
+        border-radius: 2px;
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+// malo responsivno da ne puca na uskim ekranima
+@media (max-width: 700px) {
+  .navbar {
+    padding: 0 16px;
+    gap: 16px;
+  }
 
   .brand {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    color: $text-light;
-
-    span {
-      font-weight: 400;
-      opacity: 0.9;
-    }
+    font-size: 18px;
   }
 
   .nav-links {
-    display: flex;
-    gap: 28px;
+    gap: 10px;
 
     a {
-      text-decoration: none;
-      color: $text-muted;
-      font-size: 15px;
-      font-weight: 500;
-      position: relative;
-      padding-bottom: 4px;
-
-      &:hover {
-        color: $text-light;
-      }
-
-      &.active {
-        color: $text-light;
-
-        &::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          height: 2px;
-          background-color: $text-light;
-          border-radius: 2px;
-        }
-      }
+      font-size: 14px;
+      padding: 8px 8px;
     }
   }
 }
