@@ -251,3 +251,36 @@
   font-size: 13px;
   line-height: 1.5;
 }
+
+.ds__similar {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.ds__similar-item {
+  text-align: left;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: rgba(15, 23, 42, 0.03);
+  border-radius: 14px;
+  padding: 10px 12px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(25, 118, 210, 0.08);
+    border-color: rgba(25, 118, 210, 0.25);
+  }
+}
+
+.ds__similar-title {
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.ds__similar-sub {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+

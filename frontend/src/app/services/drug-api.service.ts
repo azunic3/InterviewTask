@@ -45,4 +45,11 @@ export class DrugApiService {
       `${this.baseUrl}/drugs/top-adverse-events?query=${encodeURIComponent(query)}&limit=${limit}`,
     );
   }
+
+  getSimilarDrugs(query: string, excludeDrugKey?: string, limit = 6) {
+  let url = `${this.baseUrl}/drugs/similar?query=${encodeURIComponent(query)}&limit=${limit}`;
+  if (excludeDrugKey) url += `&excludeDrugKey=${encodeURIComponent(excludeDrugKey)}`;
+  return this.http.get<{ query: string; ingredientKey: string | null; items: any[] }>(url);
+}
+
 }

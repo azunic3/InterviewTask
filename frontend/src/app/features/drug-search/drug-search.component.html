@@ -103,6 +103,33 @@
             </p>
           </div>
 
+          <div class="ds__box" *ngIf="result.availabilityStatus !== 'Available'">
+  <h3>Similar medicines</h3>
+
+  <p class="ds__muted" *ngIf="similarIngredient">
+    Based on active ingredient: <strong>{{ similarIngredient | titlecase }}</strong>
+  </p>
+
+  <div *ngIf="similarState === 'loading'">Loading…</div>
+  <div *ngIf="similarState === 'error'">{{ similarMessage }}</div>
+
+  <ng-container *ngIf="similarState === 'success'">
+    <p class="ds__muted" *ngIf="!similarItems.length">{{ similarMessage }}</p>
+
+    <div class="ds__similar" *ngIf="similarItems.length">
+      <button
+        class="ds__similar-item"
+        type="button"
+        *ngFor="let s of similarItems"
+        (click)="pickSimilar(s)">
+        <div class="ds__similar-title">{{ displayDrugName(s) }}</div>
+        <div class="ds__similar-sub" *ngIf="s.manufacturerName">{{ s.manufacturerName }}</div>
+      </button>
+    </div>
+  </ng-container>
+</div>
+
+
           <!-- 4) NOTIFY -->
           <div class="ds__box" *ngIf="result.availabilityStatus !== 'Available'">
             <h3>Notify me when available</h3>

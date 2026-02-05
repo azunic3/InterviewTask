@@ -22,6 +22,10 @@ export class DrugSearchComponent implements OnInit {
   adverseMessage = '';
   adverseChartData: { term: string; count: number }[] = [];
   private adverseChart?: Chart;
+  similarState: 'idle' | 'loading' | 'success' | 'error' = 'idle';
+  similarMessage = '';
+  similarIngredient: string | null = null;
+  similarItems: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -114,6 +118,7 @@ export class DrugSearchComponent implements OnInit {
         this.result = res;
         this.loading = false;
         this.loadTopAdverseEvents();
+        this.loadSimilarDrugs();
       },
       error: () => {
         this.error = 'Failed to search drug.';
@@ -167,4 +172,49 @@ export class DrugSearchComponent implements OnInit {
     const matched = allergens.filter((a) => hay.includes(a.toLowerCase()));
     return { type: matched.length ? 'match' : 'safe', matched };
   }
+
+  loadSimilarDrugs(): void {
+  if (!this.result) return;
+  if (this.result.availabilityStatus === 'Available') return;
+
+  this.similarState = 'loading';
+  this.similarMessage = '';
+  this.similarIngredient = null;
+  this.similarItems = [];
+
+  const q = this.result.query; // npr diphenhydramine
+  const exclude = this.result.drugKey;
+
+  this.drugApi.getSimilarDrugs(q, exclude, 6).subscribe({
+    next: (res) => {
+      this.similarIngredient = res?.ingredientKey ?? null;
+      this.similarItems = (res?.items ?? []).slice(0, 6);
+      this.similarState = 'success';
+      if (!this.similarItems.length) {
+        this.similarMessage = 'No similar medicines found.';
+      }
+    },
+    error: () => {
+      this.similarState = 'error';
+      this.similarMessage = 'Could not load similar medicines.';
+    }
+  });
+}
+
+displayDrugName(item: any): string {
+  return item?.brandName || item?.genericName || item?.drugKey || 'Unknown';
+}
+
+pickSimilar(item: any): void {
+  const name = item?.genericName || item?.brandName || item?.drugKey;
+  if (!name) return;
+
+  this.query = name;
+  this.notifyEmail = '';
+  this.notifyMessage = '';
+  this.notifyState = 'idle';
+
+  this.search();
+}
+
 }
