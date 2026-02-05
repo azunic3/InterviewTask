@@ -67,14 +67,16 @@ notifyMe(): void {
 
   this.drugApi.notifyAvailability(this.result.drugKey, this.notifyEmail).subscribe({
     next: (res) => {
-      this.notifyState = res?.created ? 'success' : 'exists';
-      this.notifyMessage = res?.created
-        ? 'Thanks! We saved your request and will notify you when it’s available.'
-        : 'You already requested a notification for this medicine.';
+      this.notifyState = 'success';
+      this.notifyMessage = res?.message
+        ?? 'Thanks! We saved your request and will notify you when it’s available.';
     },
-    error: () => {
+    error: (err) => {
       this.notifyState = 'error';
-      this.notifyMessage = 'Could not save your request. Please try again.';
+      this.notifyMessage =
+        err?.error
+          ? (typeof err.error === 'string' ? err.error : err.error?.message) 
+          : 'Could not save your request. Please try again.';
     },
   });
 }

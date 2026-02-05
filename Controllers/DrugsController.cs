@@ -118,6 +118,45 @@ public class DrugsController : ControllerBase
         return Ok(data);
     }
 
+    [HttpGet("top-adverse-events")]
+    public async Task<ActionResult<TopAdverseEventsDto>> GetTopAdverseEvents(
+    [FromQuery] string query,
+    [FromQuery] int limit = 10,
+    CancellationToken ct = default)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+            return BadRequest("Query is required.");
+
+        using var doc = await _openFda.GetTopAdverseReactionsRawAsync(query, limit, ct);
+
+        if (!doc.RootElement.TryGetProperty("results", out var results) ||
+            results.ValueKind != JsonValueKind.Array)
+            return NotFound("No adverse event data found.");
+
+        var items = new List<AdverseEventItemDto>();
+
+        foreach (var r in results.EnumerateArray())
+        {
+            var term = r.TryGetProperty("term", out var t) ? t.GetString() : null;
+            var count = r.TryGetProperty("count", out var c) && c.TryGetInt32(out var n) ? n : 0;
+
+            if (!string.IsNullOrWhiteSpace(term))
+                items.Add(new AdverseEventItemDto
+                {
+                    Term = term!,
+                    Count = count
+                });
+        }
+
+        var dto = new TopAdverseEventsDto
+        {
+            DrugKey = query.Trim().ToLowerInvariant(),
+            Items = items
+        };
+
+        return Ok(dto);
+    }
+
     private static string? GetFirstString(JsonElement obj, params string[] path)
     {
         JsonElement cur = obj;

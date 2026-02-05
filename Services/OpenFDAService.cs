@@ -37,5 +37,27 @@ namespace InterviewTask.Services
             var stream = await resp.Content.ReadAsStreamAsync(ct);
             return await JsonDocument.ParseAsync(stream, cancellationToken: ct);
         }
+
+        public async Task<JsonDocument> GetTopAdverseReactionsRawAsync(string query, int limit = 10, CancellationToken ct = default)
+        {
+            var q = query.Trim().ToLowerInvariant();
+
+            var search = $"patient.drug.medicinalproduct:\"{q}\"";
+
+            var url = $"/drug/event.json?search={Uri.EscapeDataString(search)}" +
+                      $"&count=patient.reaction.reactionmeddrapt.exact" +
+                      $"&limit={limit}";
+
+            if (!string.IsNullOrWhiteSpace(_options.ApiKey))
+                url += $"&api_key={Uri.EscapeDataString(_options.ApiKey!)}";
+
+            var client = _httpClientFactory.CreateClient("OpenFda");
+            using var resp = await client.GetAsync(url, ct);
+
+            resp.EnsureSuccessStatusCode();
+
+            var stream = await resp.Content.ReadAsStreamAsync(ct);
+            return await JsonDocument.ParseAsync(stream, cancellationToken: ct);
+        }
     }
 }

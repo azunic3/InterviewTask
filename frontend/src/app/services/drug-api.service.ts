@@ -32,7 +32,7 @@ export class DrugApiService {
   }
 
   notifyAvailability(drugKey: string, email: string) {
-  return this.http.post<any>(`${this.baseUrl}/availability-requests`, {
+  return this.http.post<any>(`${this.baseUrl}/availability-requests/notify`, {
     drugKey,
     email
   });
