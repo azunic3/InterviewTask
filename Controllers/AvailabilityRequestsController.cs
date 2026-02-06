@@ -10,34 +10,14 @@ namespace InterviewTask.Controllers
     [Route("api/availability-requests")]
     public class AvailabilityRequestsController : ControllerBase
     {
-        private readonly AvailabilityRequestService _service;
         private readonly IConfiguration _config;
 
-        public AvailabilityRequestsController(AvailabilityRequestService service, IConfiguration config)
+        public AvailabilityRequestsController(IConfiguration config)
         {
-            _service = service;
             _config = config;
 
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateAvailabilityRequestDto dto)
-        {
-            if (!ModelState.IsValid)
-                return ValidationProblem(ModelState);
-
-            var (created, request) = await _service.CreateAsync(dto.DrugKey, dto.Email);
-
-            return Ok(new
-            {
-                created,
-                requestId = request.Id,
-                drugKey = request.DrugKey,
-                email = request.Email,
-                status = request.Status.ToString(),
-                createdAtUtc = request.CreatedAtUtc
-            });
-        }
         [HttpPost("notify")]
         public async Task<IActionResult> Notify([FromBody] CreateAvailabilityRequestDto dto)
         {

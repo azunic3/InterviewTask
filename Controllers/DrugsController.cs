@@ -167,7 +167,6 @@ public async Task<ActionResult<SimilarDrugsResponseDto>> Similar(
     if (string.IsNullOrWhiteSpace(query))
         return BadRequest("Query is required.");
 
-    // 1) Uzmi prvi label rezultat za query da izvučemo active ingredient
     using var firstDoc = await _openFda.SearchDrugLabelRawAsync(query, limit: 1, ct);
 
     if (!firstDoc.RootElement.TryGetProperty("results", out var firstResults) ||
@@ -192,7 +191,6 @@ public async Task<ActionResult<SimilarDrugsResponseDto>> Similar(
         });
     }
 
-    // 2) Nađi više label rezultata po ingredientKey
     using var simDoc = await _openFda.SearchDrugLabelByIngredientRawAsync(ingredientKey, limit: 25, ct);
 
     if (!simDoc.RootElement.TryGetProperty("results", out var simResults) || simResults.ValueKind != JsonValueKind.Array)
@@ -256,16 +254,13 @@ public async Task<ActionResult<DrugUsageDto>> Usage(
     if (first.ValueKind == JsonValueKind.Undefined)
         return NotFound("No results from openFDA.");
 
-    // pokušaj uzeti usage tekst iz najkorisnijih polja
     var dosage = GetFirstString(first, "dosage_and_administration");
     var directions = GetFirstString(first, "directions");
 
-    // fallback: nekad bude "information_for_patients" ili slično, ali za sad ostavimo ova 2
     var usageText = string.Join("\n\n",
         new[] { dosage, directions }
             .Where(x => !string.IsNullOrWhiteSpace(x)));
 
-    // drugKey u tvom sistemu
     var brand = GetFirstString(first, "openfda", "brand_name");
     var generic = GetFirstString(first, "openfda", "generic_name");
     var drugKey = DrugKeyBuilder.Build(generic, brand, query);

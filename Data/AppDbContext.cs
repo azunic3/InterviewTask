@@ -9,7 +9,6 @@ namespace InterviewTask.Data
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options) { }
 
-        public DbSet<DrugLabelCache> DrugLabelCaches => Set<DrugLabelCache>();
         public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
         public DbSet<AvailabilityRequest> AvailabilityRequests => Set<AvailabilityRequest>();
         public DbSet<AllergyCheckLog> AllergyCheckLogs => Set<AllergyCheckLog>();
@@ -17,31 +16,6 @@ namespace InterviewTask.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<DrugLabelCache>(e =>
-            {
-                e.ToTable("DrugLabelCache");
-
-                e.HasKey(x => x.Id);
-
-                e.Property(x => x.SetId)
-                    .IsRequired()
-                    .HasMaxLength(80);
-
-                e.Property(x => x.QueryKey)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                e.Property(x => x.BrandName).HasMaxLength(200);
-                e.Property(x => x.GenericName).HasMaxLength(200);
-                e.Property(x => x.ManufacturerName).HasMaxLength(200);
-
-                e.Property(x => x.JsonLabel).IsRequired();
-                e.Property(x => x.CachedAtUtc).IsRequired();
-
-                e.HasIndex(x => x.SetId).IsUnique();
-                e.HasIndex(x => x.QueryKey);
-            });
 
             modelBuilder.Entity<InventoryItem>(e =>
             {
