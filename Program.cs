@@ -22,9 +22,6 @@ var conn = !string.IsNullOrWhiteSpace(rawUrl)
     ? ToNpgsql(rawUrl)
     : builder.Configuration.GetConnectionString("DefaultConnection");
 
-Console.WriteLine("DATABASE_URL=" + (rawUrl ?? "<null>"));
-Console.WriteLine("FINAL_CONN=" + (conn ?? "<null>"));
-
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(conn));
 
@@ -61,13 +58,8 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors("AllowAngular");
 

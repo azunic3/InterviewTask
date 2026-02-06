@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\InterviewTask\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\controllers\\drugscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:controllers\\drugscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -41,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\controllers\\availabilityrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:controllers\\availabilityrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\controllers\\drugscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:controllers\\drugscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\services\\openfdaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -122,7 +122,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -130,19 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "InventoryItem.cs",
-              "DocumentMoniker": "C:\\InterviewTask\\Model\\InventoryItem.cs",
-              "RelativeDocumentMoniker": "Model\\InventoryItem.cs",
-              "ToolTip": "C:\\InterviewTask\\Model\\InventoryItem.cs",
-              "RelativeToolTip": "Model\\InventoryItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T20:09:06.322Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\InterviewTask\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
@@ -154,20 +142,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\InterviewTask\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\InterviewTask\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAAADkAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBUAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-04T18:45:12.997Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "InterviewTask.csproj",
               "DocumentMoniker": "C:\\InterviewTask\\InterviewTask.csproj",
               "RelativeDocumentMoniker": "InterviewTask.csproj",
@@ -179,7 +167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\InterviewTask\\.gitignore",
               "RelativeDocumentMoniker": ".gitignore",
@@ -192,7 +180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\InterviewTask\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -205,7 +193,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\InterviewTask\\Dockerfile",
               "RelativeDocumentMoniker": "Dockerfile",
@@ -218,7 +206,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
+              "Title": "DrugsController.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Controllers\\DrugsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DrugsController.cs",
+              "ToolTip": "C:\\InterviewTask\\Controllers\\DrugsController.cs",
+              "RelativeToolTip": "Controllers\\DrugsController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T18:50:39.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "InventoryItem.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Model\\InventoryItem.cs",
+              "RelativeDocumentMoniker": "Model\\InventoryItem.cs",
+              "ToolTip": "C:\\InterviewTask\\Model\\InventoryItem.cs",
+              "RelativeToolTip": "Model\\InventoryItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:09:06.322Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "docker-compose.yml",
               "DocumentMoniker": "C:\\InterviewTask\\docker-compose.yml",
               "RelativeDocumentMoniker": "docker-compose.yml",
@@ -230,19 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DrugsController.cs",
-              "DocumentMoniker": "C:\\InterviewTask\\Controllers\\DrugsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DrugsController.cs",
-              "ToolTip": "C:\\InterviewTask\\Controllers\\DrugsController.cs",
-              "RelativeToolTip": "Controllers\\DrugsController.cs",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAgwBEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-04T18:50:39.519Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\InterviewTask\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
@@ -266,7 +267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "AvailabilityRequestsController.cs",
               "DocumentMoniker": "C:\\InterviewTask\\Controllers\\AvailabilityRequestsController.cs",
               "RelativeDocumentMoniker": "Controllers\\AvailabilityRequestsController.cs",
