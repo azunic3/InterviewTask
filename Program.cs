@@ -5,7 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Console.WriteLine("CONN=" + (builder.Configuration.GetConnectionString("DefaultConnection") ?? "NULL"));
+var envConn = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
+Console.WriteLine("ENV_CONN=" + (envConn ?? "<null>"));
+
+var cfgConn = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine("CFG_CONN=" + (cfgConn ?? "<null>"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
