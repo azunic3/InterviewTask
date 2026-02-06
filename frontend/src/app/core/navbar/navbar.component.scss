@@ -21,18 +21,19 @@
 // Main navbar
 .navbar {
   position: sticky;
-  top: 16px;
+  top: 0;
   z-index: 1000;
-  margin: 0 16px 28px;
+  margin: 0;
+  width: 100%;
   
   @media (max-width: 768px) {
-    margin: 0 8px 20px;
-    top: 8px;
+    margin: 0;
+    top: 0;
   }
   
   @media (max-width: 480px) {
-    margin: 0 4px 16px;
-    top: 4px;
+    margin: 0;
+    top: 0;
   }
 }
 
@@ -42,13 +43,14 @@
   justify-content: space-between;
   gap: 24px;
   
-  height: 64px;
+  height: 60px;
   padding: 0 24px;
+  width: 100%;
   
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1);
   
@@ -79,7 +81,7 @@
   gap: 10px;
   text-decoration: none;
   color: var(--text);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.3px;
   cursor: pointer;
@@ -162,7 +164,7 @@
   
   text-decoration: none;
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.2px;
   cursor: pointer;
