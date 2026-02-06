@@ -34,9 +34,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
-        p => p.WithOrigins("http://localhost:4200")
+        p => p.WithOrigins("http://localhost:4200", "agile-courage-production-0160.up.railway.app")
               .AllowAnyHeader()
               .AllowAnyMethod());
+
 });
 
 builder.Services.Configure<OpenFDAOptions>(builder.Configuration.GetSection("OpenFda"));
