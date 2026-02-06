@@ -4,20 +4,21 @@ using InterviewTask.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var conn =
+    Environment.GetEnvironmentVariable("DATABASE_URL")
+    ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
-var envConn = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
-Console.WriteLine("ENV_CONN=" + (envConn ?? "<null>"));
+Console.WriteLine("DATABASE_URL=" + (Environment.GetEnvironmentVariable("DATABASE_URL") ?? "<null>"));
+Console.WriteLine("FINAL_CONN=" + (conn ?? "<null>"));
 
-var cfgConn = builder.Configuration.GetConnectionString("DefaultConnection");
-Console.WriteLine("CFG_CONN=" + (cfgConn ?? "<null>"));
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(conn));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {

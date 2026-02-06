@@ -8,3 +8,10 @@ obj/
 ./vs
 
 echo Properties/PublishProfiles/ >> .gitignore
+
+**/*.db
+**/*.db-shm
+**/*.db-wal
+CopilotIndices/
+DesignTimeBuild/
+FileContentIndex/
