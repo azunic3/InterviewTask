@@ -32,7 +32,6 @@
 // Main container
 .ds {
   width: 100%;
-  max-width: 1600px;
   margin: 0 auto;
   padding: 0;
   
@@ -59,6 +58,7 @@
 
 // HEADER
 .ds__header-main {
+  justify-self: center;
   margin-bottom: 36px;
   padding: 8px 0;
   border-bottom: 2px solid var(--border);
@@ -74,30 +74,30 @@
 
 .ds__page-title {
   margin: 0 0 8px;
-  font-size: 36px;
+  font-size: 44px;
   font-weight: 700;
   letter-spacing: -0.5px;
   color: var(--text);
   line-height: 1.2;
   
   @media (max-width: 768px) {
-    font-size: 28px;
+    font-size: 36px;
   }
   
   @media (max-width: 480px) {
-    font-size: 24px;
+    font-size: 28px;
   }
 }
 
 .ds__page-subtitle {
   margin: 8px 0 0;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--text-secondary);
   line-height: 1.5;
   max-width: 700px;
   
   @media (max-width: 768px) {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -106,7 +106,7 @@
   display: grid;
   grid-template-columns: 380px 1fr;
   gap: 28px;
-  align-items: start;
+  align-items: stretch;
   
   @media (max-width: 1200px) {
     gap: 24px;
@@ -121,12 +121,21 @@
 
 // SIDEBAR
 .ds__sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
   @media (max-width: 1024px) {
     margin-bottom: 32px;
+    height: auto;
   }
 }
 
 .ds__sticky-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
   @media (min-width: 1025px) {
     position: sticky;
     top: 112px;
@@ -140,9 +149,11 @@
   background: linear-gradient(135deg, var(--surface) 0%, #fafbfc 100%);
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border-subtle);
+  flex: 1;
   
   @media (max-width: 480px) {
     padding: 18px;
+    flex: none;
   }
 }
 
@@ -165,14 +176,14 @@
 .ds__label {
   display: block;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text);
   letter-spacing: 0.3px;
   text-transform: uppercase;
   opacity: 0.8;
   
   @media (max-width: 480px) {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
@@ -193,7 +204,7 @@
   border-radius: var(--radius-md);
   border: 1.5px solid var(--border);
   background: var(--surface);
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text);
   outline: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -220,7 +231,7 @@
 }
 
 .ds__hint {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
   line-height: 1.4;
   display: flex;
@@ -228,7 +239,7 @@
   gap: 6px;
   
   @media (max-width: 480px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
@@ -243,7 +254,7 @@
   border-radius: var(--radius-md);
   background: #fee2e2;
   color: #991b1b;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   border: 1px solid #fca5a5;
   margin-top: 4px;
@@ -255,7 +266,7 @@
   padding: 12px 16px;
   border-radius: var(--radius-md);
   border: none;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
@@ -326,19 +337,20 @@
 }
 
 .ds__result-title {
+  justify-self: center;
   margin: 0 0 24px;
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.3px;
   
   @media (max-width: 768px) {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 18px;
   }
   
   @media (max-width: 480px) {
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 16px;
   }
 }
@@ -347,7 +359,7 @@
 .ds__summary {
   margin: 0 auto 28px !important;
   padding: 24px !important;
-  max-width: 900px;
+  width: 100%;
   text-align: center;
   background: linear-gradient(135deg, #f0f7ff 0%, #f8fafb 100%) !important;
   border: 2px solid var(--border) !important;
@@ -363,7 +375,7 @@
   
   h3 {
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--text);
   }
@@ -383,7 +395,7 @@
   gap: 6px;
   padding: 8px 14px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
   animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -446,7 +458,7 @@
     margin-top: 12px;
     margin-bottom: 6px;
     color: var(--text);
-    font-size: 13px;
+    font-size: 14px;
     text-transform: uppercase;
     opacity: 0.7;
     letter-spacing: 0.3px;
@@ -456,7 +468,7 @@
     margin: 6px 0 0;
     color: var(--text);
     line-height: 1.6;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -480,7 +492,7 @@
 }
 
 .ds__detail-label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--muted);
   text-transform: uppercase;
@@ -488,7 +500,7 @@
 }
 
 .ds__detail-value {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text);
   font-weight: 500;
 }
@@ -498,7 +510,7 @@
   padding: 16px;
   text-align: center;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 15px;
   background: var(--surface-alt);
   border-radius: var(--radius-md);
 }
@@ -519,7 +531,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
   
   @media (max-width: 1200px) {
     gap: 20px;
@@ -574,7 +586,7 @@
 
 .ds__box-title {
   margin: 0 0 16px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text);
   display: flex;
@@ -624,7 +636,7 @@
   gap: 12px;
   padding: 40px 20px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .ds__spinner {
@@ -652,7 +664,7 @@
   background: #fee2e2;
   color: #991b1b;
   border-radius: var(--radius-md);
-  font-size: 13px;
+  font-size: 15px;
   border: 1px solid #fca5a5;
 }
 
@@ -660,7 +672,7 @@
   padding: 20px;
   text-align: center;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 15px;
   background: var(--surface-alt);
   border-radius: var(--radius-md);
   margin: 0;
@@ -668,7 +680,7 @@
 
 .ds__section-hint {
   margin: 0 0 12px;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
   line-height: 1.4;
   
@@ -680,7 +692,7 @@
 
 .ds__source-hint {
   margin: 12px 0 0;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   display: flex;
   align-items: center;
@@ -720,12 +732,12 @@
   font-weight: 700;
   color: var(--text);
   line-height: 1.3;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .ds__similar-sub {
   margin-top: 4px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
 }
 
@@ -758,7 +770,7 @@
   background: rgba(16, 185, 129, 0.1);
   color: #065f46;
   border-radius: var(--radius-md);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   animation: slideDown 0.3s ease-out;
 }
@@ -772,7 +784,7 @@
   margin: 0;
   color: var(--text);
   line-height: 1.7;
-  font-size: 14px;
+  font-size: 16px;
   max-height: none;
   transition: max-height 0.3s ease-out;
 }
@@ -792,7 +804,7 @@
   color: var(--primary);
   font-weight: 700;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 15px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -816,7 +828,7 @@
   margin: 28px 0 0;
   padding: 16px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
   text-align: center;
   background: var(--surface-alt);
@@ -843,7 +855,7 @@
   
   li {
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: 16px;
     
     &:last-child {
       margin-bottom: 0;
@@ -858,7 +870,7 @@
   
   li {
     margin: 4px 0;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text);
   }
 }
