@@ -63,18 +63,16 @@ The application integrates public drug data with a custom backend and database.
 - Node.js (v18+ recommended)
 - Angular CLI
 - SQL Server (LocalDB or full instance)
-- Mailgun account (for email notifications)
+- Docker Desktop
 
 ---
 
 ## Running the Backend
 
-1. Configure the database connection string in `appsettings.json`.
-2. Apply Entity Framework migrations:
-   dotnet ef database update
-3. Run the backend
+1. Run docker compose up --build
+2. Run the backend
    dotnet run
-4. The API will be available at: https://localhost:7091
+3. The API will be available at: https://localhost:7091
 
 ## Running the Frontend
 1. Navigate to the frontend folder: 
