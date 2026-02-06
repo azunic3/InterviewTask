@@ -3,12 +3,26 @@ using InterviewTask.Options;
 using InterviewTask.Services;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-var conn =
-    Environment.GetEnvironmentVariable("DATABASE_URL")
-    ?? builder.Configuration.GetConnectionString("DefaultConnection");
+static string ToNpgsql(string url)
+{
+    var uri = new Uri(url); // postgresql://user:pass@host:port/db
 
-Console.WriteLine("DATABASE_URL=" + (Environment.GetEnvironmentVariable("DATABASE_URL") ?? "<null>"));
+    var userInfo = uri.UserInfo.Split(':', 2);
+    var user = Uri.UnescapeDataString(userInfo[0]);
+    var pass = userInfo.Length > 1 ? Uri.UnescapeDataString(userInfo[1]) : "";
+
+    var db = uri.AbsolutePath.TrimStart('/');
+
+    return $"Host={uri.Host};Port={uri.Port};Database={db};Username={user};Password={pass};SSL Mode=Require;Trust Server Certificate=true";
+}
+
+var builder = WebApplication.CreateBuilder(args);
+var rawUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+var conn = !string.IsNullOrWhiteSpace(rawUrl)
+    ? ToNpgsql(rawUrl)
+    : builder.Configuration.GetConnectionString("DefaultConnection");
+
+Console.WriteLine("DATABASE_URL=" + (rawUrl ?? "<null>"));
 Console.WriteLine("FINAL_CONN=" + (conn ?? "<null>"));
 
 builder.Services.AddDbContext<AppDbContext>(options =>

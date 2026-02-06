@@ -1,0 +1,476 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\InterviewTask\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\interviewtask.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:interviewtask.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\model\\inventoryitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:model\\inventoryitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\controllers\\availabilityrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:controllers\\availabilityrequestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\controllers\\drugscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:controllers\\drugscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\services\\openfdaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:services\\openfdaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:services\\inventoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\services\\drugkeybuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:services\\drugkeybuilder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\services\\allergymatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:services\\allergymatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dtos\\drugusagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dtos\\drugusagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\helpers\\activeingredientparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:helpers\\activeingredientparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dtos\\similardrugsresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dtos\\similardrugsresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dtos\\similardrugdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dtos\\similardrugdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dtos\\topadverseeventsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dtos\\topadverseeventsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dtos\\adverseeventitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dtos\\adverseeventitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dtos\\createavailabilityrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dtos\\createavailabilityrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dtos\\drugsearchresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dtos\\drugsearchresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\model\\availabilityrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:model\\availabilityrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\dtos\\popularsearchesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:dtos\\popularsearchesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\model\\allergychecklog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:model\\allergychecklog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\enums\\availabilitystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:enums\\availabilitystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|c:\\interviewtask\\options\\openfdaoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A087B67A-4C41-4C79-BE56-7D576C28DFCE}|InterviewTask.csproj|solutionrelative:options\\openfdaoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "InventoryItem.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Model\\InventoryItem.cs",
+              "RelativeDocumentMoniker": "Model\\InventoryItem.cs",
+              "ToolTip": "C:\\InterviewTask\\Model\\InventoryItem.cs",
+              "RelativeToolTip": "Model\\InventoryItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:09:06.322Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\InterviewTask\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\InterviewTask\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-05T12:11:44.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\InterviewTask\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T18:45:12.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InterviewTask.csproj",
+              "DocumentMoniker": "C:\\InterviewTask\\InterviewTask.csproj",
+              "RelativeDocumentMoniker": "InterviewTask.csproj",
+              "ToolTip": "C:\\InterviewTask\\InterviewTask.csproj",
+              "RelativeToolTip": "InterviewTask.csproj",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-04T19:41:21.973Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\InterviewTask\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\InterviewTask\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-04T18:06:38.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\InterviewTask\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\InterviewTask\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-05T15:29:29.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\InterviewTask\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\InterviewTask\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-06T11:51:32.364Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\InterviewTask\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "C:\\InterviewTask\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2026-02-06T13:38:28.777Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DrugsController.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Controllers\\DrugsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DrugsController.cs",
+              "ToolTip": "C:\\InterviewTask\\Controllers\\DrugsController.cs",
+              "RelativeToolTip": "Controllers\\DrugsController.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAgwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T18:50:39.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\InterviewTask\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:15:59.994Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "OpenFDAService.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Services\\OpenFDAService.cs",
+              "RelativeDocumentMoniker": "Services\\OpenFDAService.cs",
+              "ToolTip": "C:\\InterviewTask\\Services\\OpenFDAService.cs",
+              "RelativeToolTip": "Services\\OpenFDAService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T19:44:24.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AvailabilityRequestsController.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Controllers\\AvailabilityRequestsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AvailabilityRequestsController.cs",
+              "ToolTip": "C:\\InterviewTask\\Controllers\\AvailabilityRequestsController.cs",
+              "RelativeToolTip": "Controllers\\AvailabilityRequestsController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T22:16:47.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "InventoryService.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Services\\InventoryService.cs",
+              "RelativeDocumentMoniker": "Services\\InventoryService.cs",
+              "ToolTip": "C:\\InterviewTask\\Services\\InventoryService.cs",
+              "RelativeToolTip": "Services\\InventoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:25:09.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DrugKeyBuilder.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Services\\DrugKeyBuilder.cs",
+              "RelativeDocumentMoniker": "Services\\DrugKeyBuilder.cs",
+              "ToolTip": "C:\\InterviewTask\\Services\\DrugKeyBuilder.cs",
+              "RelativeToolTip": "Services\\DrugKeyBuilder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:06:12.369Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AllergyMatcher.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Services\\AllergyMatcher.cs",
+              "RelativeDocumentMoniker": "Services\\AllergyMatcher.cs",
+              "ToolTip": "C:\\InterviewTask\\Services\\AllergyMatcher.cs",
+              "RelativeToolTip": "Services\\AllergyMatcher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:05:14.265Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "SimilarDrugDto.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Dtos\\SimilarDrugDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\SimilarDrugDto.cs",
+              "ToolTip": "C:\\InterviewTask\\Dtos\\SimilarDrugDto.cs",
+              "RelativeToolTip": "Dtos\\SimilarDrugDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T13:49:11.594Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "SimilarDrugsResponseDto.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Dtos\\SimilarDrugsResponseDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\SimilarDrugsResponseDto.cs",
+              "ToolTip": "C:\\InterviewTask\\Dtos\\SimilarDrugsResponseDto.cs",
+              "RelativeToolTip": "Dtos\\SimilarDrugsResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T13:49:56.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DrugUsageDto.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Dtos\\DrugUsageDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\DrugUsageDto.cs",
+              "ToolTip": "C:\\InterviewTask\\Dtos\\DrugUsageDto.cs",
+              "RelativeToolTip": "Dtos\\DrugUsageDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T14:54:16.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ActiveIngredientParser.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Helpers\\ActiveIngredientParser.cs",
+              "RelativeDocumentMoniker": "Helpers\\ActiveIngredientParser.cs",
+              "ToolTip": "C:\\InterviewTask\\Helpers\\ActiveIngredientParser.cs",
+              "RelativeToolTip": "Helpers\\ActiveIngredientParser.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T13:50:47.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DrugSearchResponseDto.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Dtos\\DrugSearchResponseDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\DrugSearchResponseDto.cs",
+              "ToolTip": "C:\\InterviewTask\\Dtos\\DrugSearchResponseDto.cs",
+              "RelativeToolTip": "Dtos\\DrugSearchResponseDto.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAYwBcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:02:19.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "TopAdverseEventsDto.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Dtos\\TopAdverseEventsDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\TopAdverseEventsDto.cs",
+              "ToolTip": "C:\\InterviewTask\\Dtos\\TopAdverseEventsDto.cs",
+              "RelativeToolTip": "Dtos\\TopAdverseEventsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T12:58:42.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AdverseEventItemDto.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Dtos\\AdverseEventItemDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\AdverseEventItemDto.cs",
+              "ToolTip": "C:\\InterviewTask\\Dtos\\AdverseEventItemDto.cs",
+              "RelativeToolTip": "Dtos\\AdverseEventItemDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T13:00:11.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CreateAvailabilityRequestDto.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Dtos\\CreateAvailabilityRequestDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\CreateAvailabilityRequestDto.cs",
+              "ToolTip": "C:\\InterviewTask\\Dtos\\CreateAvailabilityRequestDto.cs",
+              "RelativeToolTip": "Dtos\\CreateAvailabilityRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T22:14:11.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "PopularSearchesDto.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Dtos\\PopularSearchesDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\PopularSearchesDto.cs",
+              "ToolTip": "C:\\InterviewTask\\Dtos\\PopularSearchesDto.cs",
+              "RelativeToolTip": "Dtos\\PopularSearchesDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:44:24.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AvailabilityRequest.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Model\\AvailabilityRequest.cs",
+              "RelativeDocumentMoniker": "Model\\AvailabilityRequest.cs",
+              "ToolTip": "C:\\InterviewTask\\Model\\AvailabilityRequest.cs",
+              "RelativeToolTip": "Model\\AvailabilityRequest.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:09:04.218Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AllergyCheckLog.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Model\\AllergyCheckLog.cs",
+              "RelativeDocumentMoniker": "Model\\AllergyCheckLog.cs",
+              "ToolTip": "C:\\InterviewTask\\Model\\AllergyCheckLog.cs",
+              "RelativeToolTip": "Model\\AllergyCheckLog.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:09:02.416Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AvailabilityStatus.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Enums\\AvailabilityStatus.cs",
+              "RelativeDocumentMoniker": "Enums\\AvailabilityStatus.cs",
+              "ToolTip": "C:\\InterviewTask\\Enums\\AvailabilityStatus.cs",
+              "RelativeToolTip": "Enums\\AvailabilityStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T20:08:31.904Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "OpenFDAOptions.cs",
+              "DocumentMoniker": "C:\\InterviewTask\\Options\\OpenFDAOptions.cs",
+              "RelativeDocumentMoniker": "Options\\OpenFDAOptions.cs",
+              "ToolTip": "C:\\InterviewTask\\Options\\OpenFDAOptions.cs",
+              "RelativeToolTip": "Options\\OpenFDAOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T19:42:19.114Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
