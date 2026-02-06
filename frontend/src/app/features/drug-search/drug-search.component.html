@@ -1,144 +1,218 @@
 <section class="ds">
-  <div class="ds__shell">
-    <!-- LEFT: SEARCH -->
-    <aside class="ds__sidebar">
-      <header class="ds__header">
-        <h1>Drug Search</h1>
-        <p class="ds__subtitle">
+  <div class="ds__container">
+    <!-- HEADER -->
+    <header class="ds__header-main">
+      <div class="ds__header-content">
+        <h1 class="ds__page-title">Medicine Search</h1>
+        <p class="ds__page-subtitle">
           Search a medicine label, screen for potential allergen term matches, and check local availability.
         </p>
-      </header>
+      </div>
+    </header>
+
+    <div class="ds__shell">
+    <!-- LEFT: SEARCH -->
+    <aside class="ds__sidebar">
+      <div class="ds__sticky-wrapper">
 
       <div class="ds__panel">
-        <div class="ds__row">
-          <label class="ds__label">Medicine name</label>
-          <div class="ds__controls">
-            <input class="ds__input" [(ngModel)]="query" placeholder="e.g. aspirin" />
-            <button class="ds__btn" (click)="search()" [disabled]="loading || !query">
-              {{ loading ? 'Searching…' : 'Search' }}
-            </button>
+        <form class="ds__search-form" (ngSubmit)="search()">
+          <div class="ds__form-group">
+            <label class="ds__label" for="medicine-input">Medicine name</label>
+            <div class="ds__input-wrapper">
+              <input 
+                id="medicine-input"
+                class="ds__input" 
+                [(ngModel)]="query" 
+                name="query"
+                placeholder="e.g. aspirin" 
+                autocomplete="off"
+                aria-describedby="medicine-hint" />
+              <button 
+                class="ds__btn ds__btn--search" 
+                type="submit" 
+                [disabled]="loading || !query"
+                aria-busy="loading">
+                <span class="ds__btn-text">{{ loading ? 'Searching…' : 'Search' }}</span>
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div class="ds__row ds__row--tight">
-          <label class="ds__label">Known allergens (comma-separated)</label>
-          <input class="ds__input" [(ngModel)]="allergensInput" placeholder="e.g. penicillin, sulfa" />
-          <div class="ds__hint">
-            We match terms against warnings/contraindications and active ingredient text.
+          <div class="ds__form-group ds__form-group--last">
+            <label class="ds__label" for="allergen-input">Known allergen (optional)</label>
+            <input 
+              id="allergen-input"
+              class="ds__input" 
+              [(ngModel)]="allergensInput" 
+              name="allergen"
+              placeholder="e.g. penicillin, sulfa" 
+              autocomplete="off" />
+            <div class="ds__hint" id="medicine-hint">
+              We match terms against warnings and active ingredients.
+            </div>
           </div>
-        </div>
 
-        <p class="ds__error" *ngIf="error">{{ error }}</p>
+          <div class="ds__error" role="alert" *ngIf="error">{{ error }}</div>
+        </form>
+      </div>
       </div>
     </aside>
 
     <!-- RIGHT: RESULT CARDS -->
     <main class="ds__main">
       <section *ngIf="result" class="ds__result">
-        <h2 class="ds__title">{{ result.query | titlecase }}</h2>
+        <h2 class="ds__result-title">{{ result.query | titlecase }}</h2>
 
-        <div class="ds__cards">
-          <!-- 1) SUMMARY -->
-          <div class="ds__box">
+
+        <!-- Centered Summary (standalone, with badges) -->
+        <div class="ds__summary ds__box" role="region" aria-label="Summary">
+          <div class="ds__summary-header">
             <h3>Summary</h3>
+          </div>
+          <div class="ds__badges-container">
+            <span class="ds__badge" [ngClass]="{'ds__badge--available': result.availabilityStatus === 'Available','ds__badge--unavailable': result.availabilityStatus !== 'Available'}">
+              <span class="ds__badge-dot"></span>
+              {{ result.availabilityStatus === 'Available' ? 'In stock' : 'Not available' }}
+            </span>
 
-            <dl class="ds__dl">
-              <dt>Availability</dt>
-              <dd>
-                <span
-                  [class.ds__status-ok]="result.availabilityStatus === 'Available'"
-                  [class.ds__status-warn]="result.availabilityStatus !== 'Available'">
-                  {{ result.availabilityStatus === 'Available' ? 'In stock' : 'Not available' }}
-                </span>
-              </dd>
-
-              <dt>Allergen screening</dt>
-              <dd>
-                <ng-container [ngSwitch]="allergyStatus.type">
-                  <span *ngSwitchCase="'none'">No allergens provided.</span>
-                  <span *ngSwitchCase="'safe'">No matches found.</span>
-                  <span *ngSwitchCase="'match'">Possible allergen match found.</span>
-                </ng-container>
-              </dd>
-
-              <dt *ngIf="allergyStatus.type === 'match'">Matched terms</dt>
-              <dd *ngIf="allergyStatus.type === 'match'">
-                <ul class="ds__list-inline">
-                  <li *ngFor="let m of allergyStatus.matched">{{ m }}</li>
-                </ul>
-              </dd>
-            </dl>
+            <span *ngIf="allergyStatus.type === 'match'" class="ds__badge ds__badge--warning">
+              <span class="ds__badge-dot"></span>
+              Allergen match
+            </span>
+            <span *ngIf="allergyStatus.type === 'safe'" class="ds__badge ds__badge--safe">
+              <span class="ds__badge-dot"></span>
+              No matches
+            </span>
           </div>
 
+          <dl class="ds__dl">
+            <dt>Availability</dt>
+            <dd>
+              <span
+                [class.ds__status-ok]="result.availabilityStatus === 'Available'"
+                [class.ds__status-warn]="result.availabilityStatus !== 'Available'">
+                {{ result.availabilityStatus === 'Available' ? 'In stock' : 'Not available' }}
+              </span>
+            </dd>
+
+            <dt>Allergen screening</dt>
+            <dd>
+              <ng-container [ngSwitch]="allergyStatus.type">
+                <span *ngSwitchCase="'none'">No allergens provided.</span>
+                <span *ngSwitchCase="'safe'">No matches found.</span>
+                <span *ngSwitchCase="'match'">Possible allergen match found.</span>
+              </ng-container>
+            </dd>
+
+            <dt *ngIf="allergyStatus.type === 'match'">Matched terms</dt>
+            <dd *ngIf="allergyStatus.type === 'match'">
+              <ul class="ds__list-inline">
+                <li *ngFor="let m of allergyStatus.matched">{{ m }}</li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+
+        <div class="ds__cards">
           <!-- 2) LABEL DETAILS -->
           <div class="ds__box">
-            <h3>Label details</h3>
+            <h3 class="ds__box-title">Label details</h3>
 
-            <ul class="ds__bullets">
-              <li *ngIf="result.drug?.brandName"><strong>Brand:</strong> {{ result.drug.brandName }}</li>
-              <li *ngIf="result.drug?.genericName"><strong>Generic:</strong> {{ result.drug.genericName }}</li>
-              <li *ngIf="result.drug?.manufacturerName"><strong>Manufacturer:</strong> {{ result.drug.manufacturerName }}</li>
-              <li *ngIf="result.drug?.activeIngredient">
-                <strong>Active ingredient:</strong> {{ result.drug.activeIngredient }}
-              </li>
-              <li *ngIf="!result.drug?.brandName && !result.drug?.genericName && !result.drug?.manufacturerName && !result.drug?.activeIngredient">
+            <div class="ds__details-grid">
+              <div class="ds__detail-item" *ngIf="result.drug?.brandName">
+                <span class="ds__detail-label">Brand</span>
+                <span class="ds__detail-value">{{ result.drug.brandName }}</span>
+              </div>
+              <div class="ds__detail-item" *ngIf="result.drug?.genericName">
+                <span class="ds__detail-label">Generic</span>
+                <span class="ds__detail-value">{{ result.drug.genericName }}</span>
+              </div>
+              <div class="ds__detail-item" *ngIf="result.drug?.manufacturerName">
+                <span class="ds__detail-label">Manufacturer</span>
+                <span class="ds__detail-value">{{ result.drug.manufacturerName }}</span>
+              </div>
+              <div class="ds__detail-item" *ngIf="result.drug?.activeIngredient">
+                <span class="ds__detail-label">Active ingredient</span>
+                <span class="ds__detail-value">{{ result.drug.activeIngredient }}</span>
+              </div>
+              <div class="ds__no-data" *ngIf="!result.drug?.brandName && !result.drug?.genericName && !result.drug?.manufacturerName && !result.drug?.activeIngredient">
                 No structured label fields were returned for this query.
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
 
           <!-- 3) CHART -->
-          <div class="ds__box ds__chart">
-            <h3>Top reported side effects</h3>
+          <div class="ds__box ds__chart-box">
+            <h3 class="ds__box-title">Top reported side effects</h3>
 
-            <div *ngIf="adverseState === 'loading'">Loading chart…</div>
-            <div *ngIf="adverseState === 'error'">{{ adverseMessage }}</div>
+            <div class="ds__loading" *ngIf="adverseState === 'loading'">
+              <div class="ds__spinner"></div>
+              <span>Loading chart…</span>
+            </div>
+            <div class="ds__error-message" *ngIf="adverseState === 'error'">{{ adverseMessage }}</div>
 
             <div class="ds__chart-wrap" *ngIf="adverseState === 'success'">
               <canvas id="adverseChart"></canvas>
             </div>
 
-            <p class="ds__hint" *ngIf="adverseState === 'success'">
-              Based on openFDA adverse event reports.
+            <p class="ds__source-hint" *ngIf="adverseState === 'success'">
+              Based on openFDA adverse event reports
             </p>
           </div>
 
           <div class="ds__box" *ngIf="result.availabilityStatus !== 'Available'">
-  <h3>Similar medicines</h3>
+            <h3 class="ds__box-title">Similar medicines</h3>
 
-  <p class="ds__muted" *ngIf="similarIngredient">
-    Based on active ingredient: <strong>{{ similarIngredient | titlecase }}</strong>
-  </p>
+            <p class="ds__section-hint" *ngIf="similarIngredient">
+              <strong>Based on:</strong> {{ similarIngredient | titlecase }}
+            </p>
 
-  <div *ngIf="similarState === 'loading'">Loading…</div>
-  <div *ngIf="similarState === 'error'">{{ similarMessage }}</div>
+            <div class="ds__loading" *ngIf="similarState === 'loading'">
+              <div class="ds__spinner"></div>
+            </div>
+            <div class="ds__error-message" *ngIf="similarState === 'error'">{{ similarMessage }}</div>
 
-  <ng-container *ngIf="similarState === 'success'">
-    <p class="ds__muted" *ngIf="!similarItems.length">{{ similarMessage }}</p>
+            <ng-container *ngIf="similarState === 'success'">
+              <p class="ds__empty-state" *ngIf="!similarItems.length">{{ similarMessage }}</p>
 
-    <div class="ds__similar" *ngIf="similarItems.length">
-      <button
-        class="ds__similar-item"
-        type="button"
-        *ngFor="let s of similarItems"
-        (click)="pickSimilar(s)">
-        <div class="ds__similar-title">{{ displayDrugName(s) }}</div>
-        <div class="ds__similar-sub" *ngIf="s.manufacturerName">{{ s.manufacturerName }}</div>
-      </button>
-    </div>
-  </ng-container>
-</div>
+              <div class="ds__similar" *ngIf="similarItems.length">
+                <button
+                  class="ds__similar-item"
+                  type="button"
+                  *ngFor="let s of similarItems"
+                  (click)="pickSimilar(s)"
+                  [attr.aria-label]="'Select ' + displayDrugName(s)">
+                  <div class="ds__similar-title">{{ displayDrugName(s) }}</div>
+                  <div class="ds__similar-sub" *ngIf="s.manufacturerName">{{ s.manufacturerName }}</div>
+                </button>
+              </div>
+            </ng-container>
+          </div>
 
 
           <!-- 4) NOTIFY -->
-          <div class="ds__box" *ngIf="result.availabilityStatus !== 'Available'">
-            <h3>Notify me when available</h3>
-            <p class="ds__muted">We’ll notify you when this medicine becomes available.</p>
+          <div class="ds__box ds__notify-box" *ngIf="result.availabilityStatus !== 'Available'">
+            <h3 class="ds__box-title">Notify me when available</h3>
+            <p class="ds__section-hint">We'll notify you when this medicine becomes available.</p>
 
             <div class="ds__notify-controls">
-              <input class="ds__input ds__input--full" [(ngModel)]="notifyEmail" type="email" placeholder="you@example.com" />
-              <button class="ds__btn ds__btn--full" (click)="notifyMe()" [disabled]="notifyState==='loading' || !notifyEmail">
-                {{ notifyState === 'loading' ? 'Saving…' : 'Save request' }}
+              <input 
+                class="ds__input" 
+                [(ngModel)]="notifyEmail" 
+                name="notify-email"
+                type="email" 
+                placeholder="you@example.com"
+                autocomplete="email" />
+              <button 
+                class="ds__btn ds__btn--primary" 
+                (click)="notifyMe()" 
+                [disabled]="notifyState==='loading' || !notifyEmail"
+                [attr.aria-busy]="notifyState === 'loading'">
+                <span *ngIf="notifyState !== 'loading'" class="ds__btn-text">Save request</span>
+                <span *ngIf="notifyState === 'loading'" class="ds__btn-text">
+                  <span class="ds__spinner-small"></span>
+                  Saving…
+                </span>
               </button>
             </div>
 
@@ -146,33 +220,39 @@
           </div>
 
 <div class="ds__box">
-  <h3>Dosage & directions</h3>
+            <h3 class="ds__box-title">Dosage & directions</h3>
 
-  <div *ngIf="usageState === 'loading'">Loading…</div>
-  <div *ngIf="usageState === 'error'">{{ usageMessage }}</div>
+            <div class="ds__loading" *ngIf="usageState === 'loading'">
+              <div class="ds__spinner"></div>
+            </div>
+            <div class="ds__error-message" *ngIf="usageState === 'error'">{{ usageMessage }}</div>
 
-  <ng-container *ngIf="usageState === 'success'">
-    <p class="ds__muted" *ngIf="!usageText">{{ usageMessage }}</p>
+            <ng-container *ngIf="usageState === 'success'">
+              <p class="ds__empty-state" *ngIf="!usageText">{{ usageMessage }}</p>
 
-    <div *ngIf="usageText" class="ds__usage">
-      <p class="ds__usage-text" [class.ds__usage-text--collapsed]="!usageExpanded">
-        {{ usageText }}
-      </p>
+              <div *ngIf="usageText" class="ds__usage">
+                <p class="ds__usage-text" [class.ds__usage-text--collapsed]="!usageExpanded">
+                  {{ usageText }}
+                </p>
 
-      <button type="button" class="ds__link" (click)="usageExpanded = !usageExpanded">
-        {{ usageExpanded ? 'Show less' : 'Show more' }}
-      </button>
-    </div>
-  </ng-container>
-</div>
+                <button type="button" class="ds__expand-link" (click)="usageExpanded = !usageExpanded">
+                  <span>{{ usageExpanded ? 'Show less' : 'Show more' }}</span>
+                  <svg class="ds__expand-icon" [class.ds__expand-icon--open]="usageExpanded" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </ng-container>
+          </div>
 
 
         </div>
 
         <p class="ds__disclaimer">
-          * Informational preview of publicly available drug data. Not a medical diagnosis.
+          ⓘ Informational preview of publicly available drug data. Not a medical diagnosis.
         </p>
       </section>
     </main>
+    </div>
   </div>
 </section>

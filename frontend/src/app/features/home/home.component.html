@@ -1,47 +1,78 @@
-<section class="hero">
-  <h1>Welcome to Pharmacy</h1>
-  <p class="subtitle">
-    Search for a medicine, check potential allergy risks, and see whether it’s currently in stock in our pharmacy.
+<section class="hero" role="region" aria-label="Hero Section">
+  <div class="hero__container">
+    <div class="hero__content">
+      <h1 class="hero__title">Welcome to Pharmacy</h1>
+      <p class="hero__subtitle">
+        Search for a medicine, check potential allergy risks, and see whether it's currently in stock in our pharmacy.
+      </p>
+
+      <a class="hero__btn" routerLink="/search" aria-label="Navigate to medicine search">
+        <span class="hero__btn-icon">🔍</span>
+        <span class="hero__btn-text">Start a Medicine Search</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="popular" role="region" aria-label="Popular Searches">
+  <div class="popular__header">
+    <div class="popular__title-group">
+      <h2 class="popular__title">Popular Searches</h2>
+      <p class="popular__subtitle">Quick shortcuts to commonly searched medicines.</p>
+    </div>
+  </div>
+
+  <div class="popular__content">
+    <div class="popular__loading" *ngIf="loading">
+      <div class="spinner"></div>
+      <span>Loading popular searches...</span>
+    </div>
+
+    <div class="popular__error" role="alert" *ngIf="error">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="display: inline; margin-right: 8px;">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 7V12M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      {{ error }}
+    </div>
+
+    <div *ngIf="!loading && popularSearches.length > 0" class="cards">
+      <button
+        class="card"
+        *ngFor="let item of popularSearches"
+        (click)="goToSearch(item.query)"
+        (keydown.enter)="goToSearch(item.query)"
+        (keydown.space)="goToSearch(item.query)"
+        type="button"
+        [attr.aria-label]="'Search for ' + item.query">
+        <div class="card__content">
+          <h3 class="card__title">{{ item.query }}</h3>
+          <span class="card__hint">Click to search</span>
+        </div>
+        <div class="card__arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+
+    <div class="popular__empty" *ngIf="!loading && popularSearches.length === 0">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style="margin-bottom: 12px; opacity: 0.4;">
+        <path d="M10 19H14M5 9C5 6.23858 7.23858 4 10 4H14C16.7614 4 19 6.23858 19 9V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p class="popular__empty-text">No popular searches yet.</p>
+      <p class="popular__empty-hint">Try searching for a medicine to get started!</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <p class="footer__disclaimer">
+    ⓘ This app uses publicly available drug label data and provides informational previews only.
+    It does not guarantee 100% accuracy and is not a substitute for professional medical advice.
+    Always consult a pharmacist or doctor.
   </p>
-
-  <a class="primary-btn" routerLink="/search">Start a Drug Search</a>
-</section>
-
-<section class="popular">
-  <div class="section-title">
-    <h2>Popular Searches</h2>
-    <p>Quick shortcuts to commonly searched medicines.</p>
-  </div>
-
-  <div *ngIf="loading" class="muted">Loading...</div>
-  <div *ngIf="error" class="error">{{ error }}</div>
-
-  <div *ngIf="!loading && popularSearches.length > 0" class="cards">
-    <div
-  class="card"
-  *ngFor="let item of popularSearches"
-  (click)="goToSearch(item.query)"
-  role="button"
-  tabindex="0"
->
-  <div class="card-text">
-    <h3>{{ item.query }}</h3>
-    <span class="card-hint">Tap to search</span>
-  </div>
-
-  <div class="card-arrow">→</div>
-</div>
-  </div>
-
-  <div *ngIf="!loading && popularSearches.length === 0" class="muted">
-    No popular searches yet. Try searching for a medicine first.
-  </div>
-</section>
-
-<p class="disclaimer">
-  * This app uses publicly available drug label data and provides informational previews only.
-  It does not guarantee 100% accuracy and is not a substitute for professional medical advice.
-  Always consult a pharmacist or doctor.
-</p>
+</footer>
 
 

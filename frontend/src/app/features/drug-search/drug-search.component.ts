@@ -14,7 +14,7 @@ export class DrugSearchComponent implements OnInit {
   loading = false;
   error: string | null = null;
   result: any = null;
-  allergensInput = ''; // npr "penicillin, sulfa"
+  allergensInput = ''; 
   notifyEmail = '';
   notifyState: 'idle' | 'loading' | 'success' | 'exists' | 'error' = 'idle';
   notifyMessage = '';
