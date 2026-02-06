@@ -74,9 +74,11 @@ To access Swagger, use the following link: https://interviewtask-production-95d4
 **To run project locally, checkout to dev branch (git checkout dev)**
 
 1. Run docker compose up --build
-2. Run the backend
+2. Run following commands: dotnet ef migrations add InitialMigration
+3. dotnet ef database update
+4. Run the backend
    dotnet run
-3. The API will be available at: https://localhost:7091
+5. The API will be available at: https://localhost:7091
 
 ## Running the Frontend
 1. Navigate to the frontend folder: 
