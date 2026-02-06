@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -26,7 +24,6 @@ builder.Services.AddCors(options =>
 builder.Services.Configure<OpenFDAOptions>(builder.Configuration.GetSection("OpenFda"));
 builder.Services.AddScoped<OpenFDAService>();
 builder.Services.AddScoped<InventoryService>();
-builder.Services.AddScoped<AvailabilityRequestService>();
 
 builder.Services.AddHttpClient("OpenFda", (sp, client) =>
 {
@@ -35,6 +32,14 @@ builder.Services.AddHttpClient("OpenFda", (sp, client) =>
 });
 
 var app = builder.Build();
+
+//automatska migracija na startup
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

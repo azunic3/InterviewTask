@@ -3,6 +3,7 @@ using InterviewTask.Services;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using RestSharp.Authenticators;
+using System.Threading.Tasks;
 
 namespace InterviewTask.Controllers
 {
@@ -43,8 +44,8 @@ namespace InterviewTask.Controllers
 
             request.AddParameter("from", from);
             request.AddParameter("to", dto.Email);
-            request.AddParameter("subject", $"Zahtjev zaprimljen – {dto.DrugKey}");
-            request.AddParameter("text", "Hvala! Zaprimili smo vaš zahtjev. Obavijestit ćemo vas kada bude dostupno.");
+            request.AddParameter("subject", $"Request received – {dto.DrugKey}");
+            request.AddParameter("text", "Thank you! We have received your request.We will notify you when it becomes available..");
 
             var response = await client.ExecuteAsync(request);
 
