@@ -4,6 +4,9 @@ Medicine Checker is a full-stack web application that allows users to search for
 
 The application integrates public drug data with a custom backend and database.
 
+You can find the application on following link: https://agile-courage-production-0160.up.railway.app/ 
+To access Swagger, use the following link: https://interviewtask-production-95d4.up.railway.app/swagger/index.html 
+
 ---
 
 ## Features
@@ -68,6 +71,7 @@ The application integrates public drug data with a custom backend and database.
 ---
 
 ## Running the Backend
+**To run project locally, checkout to dev branch (git checkout dev)**
 
 1. Run docker compose up --build
 2. Run the backend
