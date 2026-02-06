@@ -19,12 +19,12 @@ export class DrugApiService {
 
   getPopularSearches(limit: number = 5): Observable<PopularSearch[]> {
     return this.http.get<PopularSearch[]>(
-      `${this.baseUrl}/drugs/popular?limit=${limit}`,
+      `${this.baseUrl}/Drugs/popular?limit=${limit}`,
     );
   }
 
   searchDrug(query: string, allergens?: string) {
-    let url = `${this.baseUrl}/drugs/search?query=${encodeURIComponent(query)}`;
+    let url = `${this.baseUrl}/Drugs/search?query=${encodeURIComponent(query)}`;
     if (allergens) {
       url += `&allergens=${encodeURIComponent(allergens)}`;
     }
@@ -43,12 +43,12 @@ export class DrugApiService {
       drugKey: string;
       items: { term: string; count: number }[];
     }>(
-      `${this.baseUrl}/drugs/top-adverse-events?query=${encodeURIComponent(query)}&limit=${limit}`,
+      `${this.baseUrl}/Drugs/top-adverse-events?query=${encodeURIComponent(query)}&limit=${limit}`,
     );
   }
 
   getSimilarDrugs(query: string, excludeDrugKey?: string, limit = 6) {
-    let url = `${this.baseUrl}/drugs/similar?query=${encodeURIComponent(query)}&limit=${limit}`;
+    let url = `${this.baseUrl}/Drugs/similar?query=${encodeURIComponent(query)}&limit=${limit}`;
     if (excludeDrugKey)
       url += `&excludeDrugKey=${encodeURIComponent(excludeDrugKey)}`;
     return this.http.get<{
@@ -64,6 +64,6 @@ export class DrugApiService {
       drugKey: string;
       usageText: string | null;
       hasUsageInfo: boolean;
-    }>(`${this.baseUrl}/drugs/usage?query=${encodeURIComponent(query)}`);
+    }>(`${this.baseUrl}/Drugs/usage?query=${encodeURIComponent(query)}`);
   }
 }
