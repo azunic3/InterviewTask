@@ -85,6 +85,34 @@ The application integrates public drug data with a custom backend and database.
 
 ---
 
+# Deployment Guide (Railway)
+
+This project is deployed using **Railway**, with separate services for the **backend**, **frontend**, and **database**.
+
+---
+
+## Deployment Architecture
+
+- **Backend**: ASP.NET Core Web API (Railway service)
+- **Frontend**: Angular production build served via Node + `serve`
+- **Database**: Managed PostgreSQL (Railway)
+- **Communication**: Frontend → Backend via HTTPS REST API
+
+---
+
+## Backend Deployment (ASP.NET Core)
+
+### Service Setup
+- Backend is deployed from the **root of the repository**
+- Railway automatically builds and runs the application
+
+### Database
+- PostgreSQL is provisioned as a Railway service
+- The backend uses the Railway-provided `DATABASE_URL`
+- The URL is converted at runtime into an Npgsql-compatible connection string
+
+---
+
 ## Mailgun Notes (Email Notifications)
 
 Email notifications will work only after the recipient email address is verified in Mailgun.
