@@ -43,6 +43,8 @@ builder.Services.Configure<OpenFDAOptions>(builder.Configuration.GetSection("Ope
 builder.Services.AddScoped<OpenFDAService>();
 builder.Services.AddScoped<InventoryService>();
 
+builder.Services.AddScoped<MailgunService>();
+
 builder.Services.AddHttpClient("OpenFda", (sp, client) =>
 {
     var opt = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<OpenFDAOptions>>().Value;
