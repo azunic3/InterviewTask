@@ -12,7 +12,8 @@ export interface PopularSearch {
 })
 export class DrugApiService {
   // backend base URL
-  private readonly baseUrl = 'https://localhost:7091/api';
+
+  private readonly baseUrl = '${environment.apiBaseUrl}/api';
 
   constructor(private http: HttpClient) {}
 

@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: 'https://localhost:7091'
+  production: true,
+  apiUrl: 'https://interviewtask-production-95d4.up.railway.app/'
 };
