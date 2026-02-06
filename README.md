@@ -82,7 +82,8 @@ To access Swagger, use the following link: https://interviewtask-production-95d4
 1. Navigate to the frontend folder: 
   cd frontend
 2. Install dependencies: npm install
-   npm install chart.js ng2-charts (required for Chart)
+   npm install
+   npm install -g @angular/cli 
 4. Start the Angular development server:
    ng serve
 5. The frontend will be available at: http://localhost:4200
