@@ -17,10 +17,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular",
-        p => p.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader()
-              .AllowAnyMethod());
+    options.AddPolicy("AllowAngular", p =>
+        p.WithOrigins(
+            "http://localhost:4200",
+            "https://localhost:4200"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+    );
 });
 
 builder.Services.Configure<OpenFDAOptions>(builder.Configuration.GetSection("OpenFda"));
@@ -42,9 +46,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowAngular");
-
 app.UseHttpsRedirection();
+app.UseCors("AllowAngular");
 
 app.UseAuthorization();
 
