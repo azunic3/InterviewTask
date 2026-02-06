@@ -3,33 +3,17 @@ using InterviewTask.Options;
 using InterviewTask.Services;
 using Microsoft.EntityFrameworkCore;
 
-static string ToNpgsql(string url)
-{
-    var uri = new Uri(url); // postgresql://user:pass@host:port/db
-
-    var userInfo = uri.UserInfo.Split(':', 2);
-    var user = Uri.UnescapeDataString(userInfo[0]);
-    var pass = userInfo.Length > 1 ? Uri.UnescapeDataString(userInfo[1]) : "";
-
-    var db = uri.AbsolutePath.TrimStart('/');
-
-    return $"Host={uri.Host};Port={uri.Port};Database={db};Username={user};Password={pass};SSL Mode=Require;Trust Server Certificate=true";
-}
-
 var builder = WebApplication.CreateBuilder(args);
-var rawUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-var conn = !string.IsNullOrWhiteSpace(rawUrl)
-    ? ToNpgsql(rawUrl)
-    : builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(conn));
-
+// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {
@@ -43,8 +27,6 @@ builder.Services.Configure<OpenFDAOptions>(builder.Configuration.GetSection("Ope
 builder.Services.AddScoped<OpenFDAService>();
 builder.Services.AddScoped<InventoryService>();
 
-builder.Services.AddScoped<MailgunService>();
-
 builder.Services.AddHttpClient("OpenFda", (sp, client) =>
 {
     var opt = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<OpenFDAOptions>>().Value;
@@ -53,17 +35,16 @@ builder.Services.AddHttpClient("OpenFda", (sp, client) =>
 
 var app = builder.Build();
 
-//automatska migracija na startup
-using (var scope = app.Services.CreateScope())
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-app.UseSwagger();
-app.UseSwaggerUI();
-
 app.UseCors("AllowAngular");
+
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
