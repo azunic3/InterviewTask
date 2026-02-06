@@ -1,4 +1,4 @@
-using InterviewTask.Data;
+﻿using InterviewTask.Data;
 using InterviewTask.Options;
 using InterviewTask.Services;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {
@@ -49,8 +49,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAngular");
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
